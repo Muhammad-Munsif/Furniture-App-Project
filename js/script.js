@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let cart = [];
     let cartItems = 0;
     let cartTotal = 0;
-
     // DOM Elements
     const cartIconDesktop = document.getElementById('cart-icon-desktop');
     const cartIconMobile = document.getElementById('cart-icon-mobile');
@@ -17,14 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const cartCountElements = document.querySelectorAll('.cart-count');
     const cartNotification = document.getElementById('cartNotification');
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
-
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
     const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
     const mobileThemeIcon = mobileThemeToggle.querySelector('i');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
     // Check for saved theme preference or use system preference
     const currentTheme = localStorage.getItem('theme');
     if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
@@ -32,12 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         themeIcon.classList.replace('fa-moon', 'fa-sun');
         mobileThemeIcon.classList.replace('fa-moon', 'fa-sun');
     }
-
     // Desktop theme toggle button click event
     themeToggle.addEventListener('click', function () {
         toggleTheme();
     });
-
     // Mobile theme toggle button click event
     mobileThemeToggle.addEventListener('click', function () {
         toggleTheme();
@@ -45,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
         mobileMenu.classList.remove('active');
         hamburger.querySelector('i').classList.replace('fa-times', 'fa-bars');
     });
-
     function toggleTheme() {
         const isDark = document.body.getAttribute('data-theme') === 'dark';
         if (isDark) {
@@ -60,12 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.setItem('theme', 'dark');
         }
     }
-
     // Mobile menu functionality
     const hamburger = document.querySelector('.hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuLinks = document.querySelectorAll('.mobile-nav-links a');
-
     hamburger.addEventListener('click', function () {
         mobileMenu.classList.toggle('active');
         // Toggle hamburger icon
@@ -76,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
             icon.classList.replace('fa-times', 'fa-bars');
         }
     });
-
     // Close mobile menu when clicking a link
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', function () {
@@ -84,20 +75,17 @@ document.addEventListener('DOMContentLoaded', function () {
             hamburger.querySelector('i').classList.replace('fa-times', 'fa-bars');
         });
     });
-
     // Cart toggle functionality
     function toggleCart() {
         cartSidebar.classList.toggle('active');
         cartOverlay.classList.toggle('active');
         document.body.style.overflow = cartSidebar.classList.contains('active') ? 'hidden' : '';
     }
-
     // Open cart
     cartIconDesktop.addEventListener('click', function (e) {
         e.preventDefault();
         toggleCart();
     });
-
     cartIconMobile.addEventListener('click', function (e) {
         e.preventDefault();
         toggleCart();
@@ -105,11 +93,9 @@ document.addEventListener('DOMContentLoaded', function () {
         mobileMenu.classList.remove('active');
         hamburger.querySelector('i').classList.replace('fa-times', 'fa-bars');
     });
-
     // Close cart
     closeCartBtn.addEventListener('click', toggleCart);
     cartOverlay.addEventListener('click', toggleCart);
-
     // Add to cart functionality
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function () {
@@ -135,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 1500);
         });
     });
-
     // Add item to cart
     function addToCart(product, price, image) {
         // Check if item already exists in cart
@@ -155,13 +140,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // Update cart display
         updateCart();
     }
-
     // Remove item from cart
     function removeFromCart(product) {
         cart = cart.filter(item => item.product !== product);
         updateCart();
     }
-
     // Update cart display
     function updateCart() {
         // Update cart count
@@ -184,7 +167,6 @@ document.addEventListener('DOMContentLoaded', function () {
             cartFooter.style.display = 'none';
         }
     }
-
     // Render cart items
     function renderCartItems() {
         if (cart.length === 0) {
