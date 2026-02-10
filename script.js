@@ -1,4 +1,4 @@
-<script>
+
         document.addEventListener('DOMContentLoaded', function () {
             // Cart data
             let cart = [];
@@ -312,4 +312,3 @@
                 }
             });
         });
-    </script>
