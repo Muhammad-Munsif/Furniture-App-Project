@@ -1,4 +1,4 @@
-<script>
+
         document.addEventListener('DOMContentLoaded', function () {
             // ==================== AUTHENTICATION SYSTEM ====================
             
@@ -783,4 +783,4 @@
                 hamburger.querySelector('i').classList.replace('fa-times', 'fa-bars');
             });
         });
-    </script>
+    
