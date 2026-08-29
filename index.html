@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
     <style>
         /* ===== RESET & BASE ===== */
         *,
@@ -1209,9 +1212,11 @@
             .hero-grid {
                 gap: 3rem;
             }
+
             .hero-content h1 {
                 font-size: 3rem;
             }
+
             .about-grid {
                 gap: 2.5rem;
             }
@@ -1222,23 +1227,29 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+
             .hero-content p {
                 margin-left: auto;
                 margin-right: auto;
             }
+
             .hero-buttons {
                 justify-content: center;
             }
+
             .hero-image img {
                 height: 360px;
             }
+
             .about-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+
             .contact-grid {
                 grid-template-columns: 1fr;
             }
+
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -1249,36 +1260,46 @@
             .nav-links {
                 display: none;
             }
+
             .hamburger {
                 display: block;
             }
+
             .container {
                 padding: 0 20px;
             }
+
             .hero {
                 padding: 110px 0 50px;
             }
+
             .hero-content h1 {
                 font-size: 2.4rem;
             }
+
             .section-title {
                 font-size: 2.2rem;
             }
+
             .product-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 1.2rem;
             }
+
             .category-grid {
                 grid-template-columns: 1fr 1fr;
             }
+
             .cart-sidebar {
                 width: 100%;
                 max-width: 100%;
                 right: -100%;
             }
+
             .category-product-list {
                 grid-template-columns: 1fr;
             }
+
             .category-page .category-title {
                 font-size: 2rem;
             }
@@ -1288,24 +1309,30 @@
             .product-grid {
                 grid-template-columns: 1fr;
             }
+
             .category-grid {
                 grid-template-columns: 1fr 1fr;
             }
+
             .hero-content h1 {
                 font-size: 2rem;
             }
+
             .auth-card {
                 padding: 1.8rem 1.2rem;
             }
+
             .hero-image img {
                 height: 260px;
             }
+
             .about-grid .about-image img {
                 height: 260px;
             }
         }
     </style>
 </head>
+
 <body>
 
     <!-- ===== HEADER ===== -->
@@ -1370,8 +1397,10 @@
                         <label>Password</label>
                         <input type="password" id="signinPassword" placeholder="••••••••" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.3rem;">Sign In</button>
-                    <div class="auth-footer">Don't have an account? <button type="button" id="switchToSignup">Sign Up</button></div>
+                    <button type="submit" class="btn btn-primary"
+                        style="width:100%;justify-content:center;margin-top:0.3rem;">Sign In</button>
+                    <div class="auth-footer">Don't have an account? <button type="button" id="switchToSignup">Sign
+                            Up</button></div>
                 </form>
             </div>
             <div class="auth-form" id="formSignup">
@@ -1389,8 +1418,10 @@
                         <label>Password</label>
                         <input type="password" id="signupPassword" placeholder="Min 6 characters" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.3rem;">Create Account</button>
-                    <div class="auth-footer">Already have an account? <button type="button" id="switchToSignin">Sign In</button></div>
+                    <button type="submit" class="btn btn-primary"
+                        style="width:100%;justify-content:center;margin-top:0.3rem;">Create Account</button>
+                    <div class="auth-footer">Already have an account? <button type="button" id="switchToSignin">Sign
+                            In</button></div>
                 </form>
             </div>
         </div>
@@ -1414,7 +1445,8 @@
                 <span>Total</span>
                 <span id="cartTotal">$0.00</span>
             </div>
-            <button class="btn btn-gold" style="width:100%;justify-content:center;" id="checkoutBtn">Proceed to Checkout</button>
+            <button class="btn btn-gold" style="width:100%;justify-content:center;" id="checkoutBtn">Proceed to
+                Checkout</button>
         </div>
     </div>
 
@@ -1433,14 +1465,16 @@
                 <div class="hero-content">
                     <div class="section-label">— Premium Collection</div>
                     <h1>Elevate your <br><span>living space</span></h1>
-                    <p>Discover thoughtfully crafted furniture that blends timeless elegance with modern comfort. Each piece tells a story of quality and design.</p>
+                    <p>Discover thoughtfully crafted furniture that blends timeless elegance with modern comfort. Each
+                        piece tells a story of quality and design.</p>
                     <div class="hero-buttons">
                         <a href="#products" class="btn btn-primary">Explore Collection</a>
                         <a href="#about" class="btn btn-outline">Our Story</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern living room interior" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Modern living room interior" loading="lazy">
                     <div class="badge">✦ Sustainably crafted</div>
                 </div>
             </div>
@@ -1454,7 +1488,8 @@
                         <div class="section-label">— Featured</div>
                         <h2 class="section-title">Bestsellers</h2>
                     </div>
-                    <a href="#categories" class="btn btn-outline btn-small">View all <i class="fas fa-arrow-right"></i></a>
+                    <a href="#categories" class="btn btn-outline btn-small">View all <i
+                            class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="product-grid" id="productGrid"></div>
             </div>
@@ -1489,13 +1524,18 @@
             <div class="container about-grid">
                 <div>
                     <div class="section-label">— About</div>
-                    <h2 class="section-title" style="margin-bottom:0.8rem;">Crafted with <br><span style="color:var(--color-gold);">passion & purpose</span></h2>
-                    <p style="color:var(--color-warm-gray);margin-bottom:1rem;">FurniCraft was born from a simple belief: furniture should be both beautiful and built to last. Every piece is designed with care, using sustainably sourced materials and traditional craftsmanship.</p>
-                    <p style="color:var(--color-warm-gray);margin-bottom:1.5rem;">From the drawing board to your home, we ensure each creation brings warmth, character, and enduring quality to your space.</p>
+                    <h2 class="section-title" style="margin-bottom:0.8rem;">Crafted with <br><span
+                            style="color:var(--color-gold);">passion & purpose</span></h2>
+                    <p style="color:var(--color-warm-gray);margin-bottom:1rem;">FurniCraft was born from a simple
+                        belief: furniture should be both beautiful and built to last. Every piece is designed with care,
+                        using sustainably sourced materials and traditional craftsmanship.</p>
+                    <p style="color:var(--color-warm-gray);margin-bottom:1.5rem;">From the drawing board to your home,
+                        we ensure each creation brings warmth, character, and enduring quality to your space.</p>
                     <a href="#products" class="btn btn-primary btn-small">Discover our collection</a>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1605773527852-c546a8584ea3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Workshop craftsmanship" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1605773527852-c546a8584ea3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Workshop craftsmanship" loading="lazy">
                 </div>
             </div>
         </section>
@@ -1505,27 +1545,38 @@
             <div class="container contact-grid">
                 <div>
                     <div class="section-label">— Contact</div>
-                    <h2 class="section-title" style="margin-bottom:1rem;">Let's <span style="color:var(--color-gold);">connect</span></h2>
-                    <p style="color:var(--color-warm-gray);margin-bottom:2rem;">Have a question or need assistance? We'd love to hear from you.</p>
+                    <h2 class="section-title" style="margin-bottom:1rem;">Let's <span
+                            style="color:var(--color-gold);">connect</span></h2>
+                    <p style="color:var(--color-warm-gray);margin-bottom:2rem;">Have a question or need assistance? We'd
+                        love to hear from you.</p>
                     <div class="contact-info-item">
                         <i class="fas fa-map-pin"></i>
-                        <div><strong>Visit us</strong><p>123 Design Street, FC 10001</p></div>
+                        <div><strong>Visit us</strong>
+                            <p>123 Design Street, FC 10001</p>
+                        </div>
                     </div>
                     <div class="contact-info-item">
                         <i class="fas fa-phone"></i>
-                        <div><strong>Call us</strong><p>(123) 456-7890</p></div>
+                        <div><strong>Call us</strong>
+                            <p>(123) 456-7890</p>
+                        </div>
                     </div>
                     <div class="contact-info-item">
                         <i class="fas fa-envelope"></i>
-                        <div><strong>Email</strong><p>hello@furnicraft.com</p></div>
+                        <div><strong>Email</strong>
+                            <p>hello@furnicraft.com</p>
+                        </div>
                     </div>
                     <div class="contact-info-item">
                         <i class="fas fa-clock"></i>
-                        <div><strong>Hours</strong><p>Mon–Fri 9am–6pm · Sat 10am–4pm</p></div>
+                        <div><strong>Hours</strong>
+                            <p>Mon–Fri 9am–6pm · Sat 10am–4pm</p>
+                        </div>
                     </div>
                 </div>
                 <div class="contact-form-card">
-                    <h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem;">Send us a message</h4>
+                    <h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem;">Send us a
+                        message</h4>
                     <form id="contactForm">
                         <div class="form-group">
                             <label>Full Name</label>
@@ -1586,7 +1637,7 @@
     </footer>
 
     <script>
-        (function() {
+        (function () {
             // ===== PRODUCT DATA =====
             const FEATURED = [
                 { id: 1, name: 'Luxury Velvet Sofa', price: 899.99, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80', desc: 'Elegant velvet with premium cushioning.' },
@@ -1777,7 +1828,7 @@
                 `).join('');
 
                 container.querySelectorAll('.add-cart, .quick-add').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
+                    btn.addEventListener('click', function (e) {
                         e.stopPropagation();
                         const id = parseInt(this.dataset.id);
                         addToCartHandler(id);
@@ -1800,7 +1851,7 @@
                 `).join('');
 
                 categoryGrid.querySelectorAll('.category-card').forEach(card => {
-                    card.addEventListener('click', function() {
+                    card.addEventListener('click', function () {
                         const key = this.dataset.key;
                         showCategoryPage(key);
                     });
@@ -1832,7 +1883,7 @@
                 `).join('');
 
                 categoryProductList.querySelectorAll('.add-from-category').forEach(btn => {
-                    btn.addEventListener('click', function(e) {
+                    btn.addEventListener('click', function (e) {
                         e.stopPropagation();
                         const id = parseInt(this.dataset.id);
                         addToCart(id);
@@ -1931,19 +1982,19 @@
                     `).join('');
 
                     cartItemsEl.querySelectorAll('.qty-dec').forEach(btn => {
-                        btn.addEventListener('click', function() {
+                        btn.addEventListener('click', function () {
                             const id = parseInt(this.dataset.id);
                             updateQuantity(id, -1);
                         });
                     });
                     cartItemsEl.querySelectorAll('.qty-inc').forEach(btn => {
-                        btn.addEventListener('click', function() {
+                        btn.addEventListener('click', function () {
                             const id = parseInt(this.dataset.id);
                             updateQuantity(id, 1);
                         });
                     });
                     cartItemsEl.querySelectorAll('.cart-item-remove').forEach(btn => {
-                        btn.addEventListener('click', function() {
+                        btn.addEventListener('click', function () {
                             const id = parseInt(this.dataset.id);
                             removeFromCart(id);
                         });
@@ -1962,7 +2013,7 @@
                 const forms = authModal.querySelectorAll('.auth-form');
                 tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
                 forms.forEach(f => f.classList.toggle('active', f.id === (tab === 'signin' ? 'formSignin' :
-                'formSignup')));
+                    'formSignup')));
             }
 
             function closeAuthModal() { authModal.classList.remove('active'); }
@@ -1997,22 +2048,28 @@
                 // Navigation
                 backFromCategory.addEventListener('click', hideCategoryPage);
 
-                homeLink.addEventListener('click', function(e) {
+                homeLink.addEventListener('click', function (e) {
                     e.preventDefault();
                     if (categoryPage.classList.contains('active')) hideCategoryPage();
                     document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
                 });
 
                 // Cart
-                $('#cartOpen').addEventListener('click', () => { cartSidebar.classList.add('active');
-                    cartOverlay.classList.add('active'); });
-                $('#cartClose').addEventListener('click', () => { cartSidebar.classList.remove('active');
-                    cartOverlay.classList.remove('active'); });
-                cartOverlay.addEventListener('click', () => { cartSidebar.classList.remove('active');
-                    cartOverlay.classList.remove('active'); });
+                $('#cartOpen').addEventListener('click', () => {
+                    cartSidebar.classList.add('active');
+                    cartOverlay.classList.add('active');
+                });
+                $('#cartClose').addEventListener('click', () => {
+                    cartSidebar.classList.remove('active');
+                    cartOverlay.classList.remove('active');
+                });
+                cartOverlay.addEventListener('click', () => {
+                    cartSidebar.classList.remove('active');
+                    cartOverlay.classList.remove('active');
+                });
 
                 // Theme
-                $('#themeToggle').addEventListener('click', function() {
+                $('#themeToggle').addEventListener('click', function () {
                     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
                     if (isDark) {
                         document.documentElement.removeAttribute('data-theme');
@@ -2027,7 +2084,7 @@
                 });
 
                 // User
-                $('#userAvatar').addEventListener('click', function(e) {
+                $('#userAvatar').addEventListener('click', function (e) {
                     e.stopPropagation();
                     if (currentUser) {
                         currentUser = null;
@@ -2039,14 +2096,14 @@
                     }
                 });
                 $('#authClose').addEventListener('click', closeAuthModal);
-                authModal.addEventListener('click', function(e) { if (e.target === this) closeAuthModal(); });
+                authModal.addEventListener('click', function (e) { if (e.target === this) closeAuthModal(); });
                 authModal.querySelectorAll('.auth-tabs button').forEach(btn => {
-                    btn.addEventListener('click', function() { openAuthModal(this.dataset.tab); });
+                    btn.addEventListener('click', function () { openAuthModal(this.dataset.tab); });
                 });
                 $('#switchToSignup').addEventListener('click', () => openAuthModal('signup'));
                 $('#switchToSignin').addEventListener('click', () => openAuthModal('signin'));
 
-                document.querySelector('#mobileMenu .btn-outline')?.addEventListener('click', function(e) {
+                document.querySelector('#mobileMenu .btn-outline')?.addEventListener('click', function (e) {
                     e.preventDefault();
                     if (currentUser) {
                         currentUser = null;
@@ -2061,12 +2118,14 @@
                 });
 
                 // Signin
-                $('#signinForm').addEventListener('submit', function(e) {
+                $('#signinForm').addEventListener('submit', function (e) {
                     e.preventDefault();
                     const email = $('#signinEmail').value.trim();
                     const password = $('#signinPassword').value.trim();
-                    if (!email || !password) { showToast('Please fill in all fields', 'fa-exclamation-circle');
-                        return; }
+                    if (!email || !password) {
+                        showToast('Please fill in all fields', 'fa-exclamation-circle');
+                        return;
+                    }
                     const users = JSON.parse(localStorage.getItem('furni_users')) || [];
                     const found = users.find(u => u.email === email && u.password === password);
                     if (found) {
@@ -2082,7 +2141,7 @@
                 });
 
                 // Signup
-                $('#signupForm').addEventListener('submit', function(e) {
+                $('#signupForm').addEventListener('submit', function (e) {
                     e.preventDefault();
                     const name = $('#signupName').value.trim();
                     const email = $('#signupEmail').value.trim();
@@ -2107,7 +2166,7 @@
                 });
 
                 // Checkout
-                $('#checkoutBtn').addEventListener('click', function() {
+                $('#checkoutBtn').addEventListener('click', function () {
                     if (!currentUser) {
                         showToast('Please sign in to checkout', 'fa-exclamation-circle');
                         cartSidebar.classList.remove('active');
@@ -2125,7 +2184,7 @@
                 });
 
                 // Hamburger
-                $('#hamburgerBtn').addEventListener('click', function() {
+                $('#hamburgerBtn').addEventListener('click', function () {
                     mobileMenu.classList.toggle('active');
                     this.querySelector('i').className = mobileMenu.classList.contains('active') ? 'fas fa-times' :
                         'fas fa-bars';
@@ -2139,7 +2198,7 @@
                 });
 
                 // Contact
-                $('#contactForm').addEventListener('submit', function(e) {
+                $('#contactForm').addEventListener('submit', function (e) {
                     e.preventDefault();
                     showToast('Message sent! We\'ll reply soon.', 'fa-paper-plane');
                     this.reset();
@@ -2148,8 +2207,10 @@
                 // Escape
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
-                        if (cartSidebar.classList.contains('active')) { cartSidebar.classList.remove('active');
-                            cartOverlay.classList.remove('active'); }
+                        if (cartSidebar.classList.contains('active')) {
+                            cartSidebar.classList.remove('active');
+                            cartOverlay.classList.remove('active');
+                        }
                         if (authModal.classList.contains('active')) closeAuthModal();
                         if (categoryPage.classList.contains('active')) hideCategoryPage();
                     }
@@ -2160,4 +2221,5 @@
         })();
     </script>
 </body>
+
 </html>
