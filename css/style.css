@@ -1,4 +1,4 @@
-    <style>
+
         /* ===== reset & base ===== */
         * {
             margin: 0;
@@ -1007,4 +1007,4 @@
                 padding: calc(40px + var(--header-height)) 0 40px;
             }
         }
-    </style>
+    
