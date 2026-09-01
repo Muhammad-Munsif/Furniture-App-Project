@@ -7,7 +7,6 @@
         { id: 3, name: 'Oak Dining Table', price: 599.99, image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80', desc: 'Solid oak, extendable for gatherings.' },
         { id: 4, name: 'Minimalist Bed Frame', price: 749.99, image: 'https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80', desc: 'Clean lines, sturdy construction.' }
     ];
-
     const CATEGORY_PRODUCTS = {
         living: [
             { id: 101, name: 'Sectional Sofa', price: 1299.99, image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80', desc: 'Spacious L-shaped sectional.' },
@@ -82,16 +81,13 @@
             { id: 610, name: 'Decorative Tray', price: 44.99, image: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80', desc: 'Gold decorative tray.' }
         ]
     };
-
     // ===== STATE =====
     let currentUser = JSON.parse(localStorage.getItem('furni_user')) || null;
     let cart = JSON.parse(localStorage.getItem('furni_cart')) || [];
     let theme = localStorage.getItem('furni_theme') || 'light';
-
     // ===== DOM refs =====
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => document.querySelectorAll(s);
-
     const productGrid = $('#productGrid');
     const cartItemsEl = $('#cartItems');
     const cartFooter = $('#cartFooter');
