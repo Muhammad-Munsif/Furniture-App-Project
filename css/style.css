@@ -4,7 +4,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 :root {
     --bg: #f8fafc;
     --surface: #ffffff;
@@ -28,7 +27,6 @@
     --section-padding: 80px 0;
     --header-height: 72px;
 }
-
 [data-theme="dark"] {
     --bg: #0b1422;
     --surface: #142030;
@@ -60,7 +58,6 @@ body {
     line-height: 1.6;
     transition: background 0.2s, color 0.2s;
 }
-
 a {
     text-decoration: none;
     color: inherit;
