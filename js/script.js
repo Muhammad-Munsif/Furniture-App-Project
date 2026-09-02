@@ -1,4 +1,4 @@
- <script>
+
         (function () {
             // ===== PRODUCT DATA =====
             const FEATURED = [
@@ -820,4 +820,4 @@
 
             document.addEventListener('DOMContentLoaded', init);
         })();
-    </script>
+    
