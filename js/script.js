@@ -1,4 +1,4 @@
- <script>
+
         (function () {
             // ============================================================
             // 1. PRODUCT DATA
@@ -902,4 +902,4 @@
 
             document.addEventListener('DOMContentLoaded', init);
         })();
-    </script>
+    
