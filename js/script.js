@@ -1351,7 +1351,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
 });
 
- <script>
+ 
         /* ============================================================
            MODULE 1: STORAGE (safe wrapper)
            ============================================================ */
@@ -2842,4 +2842,4 @@ document.addEventListener('DOMContentLoaded', () => {
             Auth.subscribe(updateAuthUI);
             updateAuthUI();
         });
-    </script>
+    
