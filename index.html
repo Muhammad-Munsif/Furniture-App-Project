@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
@@ -10,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
     <script>
         tailwind.config = {
@@ -56,522 +58,818 @@
     </script>
 
 </head>
-<body class="font-sans bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300">
 
-<!-- Apply theme ASAP -->
-<script>
-    (function() {
-        try {
-            const t = JSON.parse(localStorage.getItem('furni_theme') || '"light"');
-            if (t === 'dark') document.documentElement.classList.add('dark');
-        } catch (e) {}
-    })();
-</script>
+<body
+    class="font-sans bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300">
 
-<!-- ============================================================
+    <!-- Apply theme ASAP -->
+    <script>
+            (function () {
+                try {
+                    const t = JSON.parse(localStorage.getItem('furni_theme') || '"light"');
+                    if (t === 'dark') document.documentElement.classList.add('dark');
+                } catch (e) { }
+            })();
+    </script>
+
+    <!-- ============================================================
      FLASH BANNER
      ============================================================ -->
-<div class="gradient-brand text-white py-2">
-    <div class="max-w-7xl mx-auto px-5 flex items-center justify-center gap-4 flex-wrap">
-        <span class="font-bold text-sm"><i class="fas fa-bolt animate-wiggle inline-block"></i> FLASH SALE — 40% OFF</span>
-        <div class="flex gap-1">
-            <span class="bg-white/20 px-2 py-0.5 rounded-md font-bold text-sm min-w-[26px] text-center" id="flashHours">08</span>:
-            <span class="bg-white/20 px-2 py-0.5 rounded-md font-bold text-sm min-w-[26px] text-center" id="flashMinutes">00</span>:
-            <span class="bg-white/20 px-2 py-0.5 rounded-md font-bold text-sm min-w-[26px] text-center" id="flashSeconds">00</span>
-        </div>
-        <div class="flex-1 max-w-[160px] h-1.5 bg-white/25 rounded-full overflow-hidden">
-            <div class="h-full bg-white rounded-full transition-all duration-500" id="flashProgressBar" style="width:65%"></div>
+    <div class="gradient-brand text-white py-2">
+        <div class="max-w-7xl mx-auto px-5 flex items-center justify-center gap-4 flex-wrap">
+            <span class="font-bold text-sm"><i class="fas fa-bolt animate-wiggle inline-block"></i> FLASH SALE — 40%
+                OFF</span>
+            <div class="flex gap-1">
+                <span class="bg-white/20 px-2 py-0.5 rounded-md font-bold text-sm min-w-[26px] text-center"
+                    id="flashHours">08</span>:
+                <span class="bg-white/20 px-2 py-0.5 rounded-md font-bold text-sm min-w-[26px] text-center"
+                    id="flashMinutes">00</span>:
+                <span class="bg-white/20 px-2 py-0.5 rounded-md font-bold text-sm min-w-[26px] text-center"
+                    id="flashSeconds">00</span>
+            </div>
+            <div class="flex-1 max-w-[160px] h-1.5 bg-white/25 rounded-full overflow-hidden">
+                <div class="h-full bg-white rounded-full transition-all duration-500" id="flashProgressBar"
+                    style="width:65%"></div>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- ============================================================
+    <!-- ============================================================
      HEADER
      ============================================================ -->
-<header id="mainHeader" class="sticky top-0 z-40 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700 transition-shadow">
-    <div class="max-w-7xl mx-auto px-5 flex items-center justify-between h-16 gap-3">
-        <div class="text-xl font-bold tracking-tight cursor-pointer flex items-center gap-1 shrink-0" id="homeLink">
-            <i class="fas fa-couch text-brand-600 dark:text-brand-400 text-lg"></i>
-            Furni<span class="text-brand-600 dark:text-brand-400">Craft</span>
-        </div>
-
-        <div class="flex-1 min-w-0 max-w-sm relative hidden md:block" id="searchWrapper">
-            <div class="flex items-center bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full pl-4 pr-1 py-1 focus-within:border-brand-500 focus-within:ring-4 focus-within:ring-brand-500/15 dark:focus-within:bg-slate-800 transition">
-                <i class="fas fa-search text-slate-400 text-sm"></i>
-                <input type="text" id="searchInput" placeholder="Search..." autocomplete="off" class="flex-1 min-w-0 bg-transparent border-none px-2 py-1 text-sm outline-none text-slate-800 dark:text-slate-100 placeholder-slate-400">
-                <button id="searchBtn" class="bg-brand-600 hover:bg-brand-700 text-white rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fas fa-arrow-right text-xs"></i></button>
-            </div>
-            <div id="searchSuggestions" class="hidden absolute top-full mt-2 left-0 right-0 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl max-h-96 overflow-y-auto z-50"></div>
-        </div>
-
-        <nav class="hidden lg:flex gap-4 items-center text-sm font-medium">
-            <a href="#home" class="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">Home</a>
-            <a href="#products" class="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">Products</a>
-            <a href="#categories" class="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">Categories</a>
-            <a href="#dashboard" id="dashboardNav" style="display:none;" class="text-brand-600 dark:text-brand-400 font-semibold bg-brand-50 dark:bg-brand-900/30 px-3 py-1 rounded-full hover:bg-brand-600 hover:text-white transition">
-                <i class="fas fa-th-large"></i> Dashboard
-            </a>
-            <a href="#admin" id="adminNav" style="display:none;" class="bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-3 py-1 rounded-full font-bold hover:from-amber-600 hover:to-yellow-700 transition">
-                <i class="fas fa-crown"></i> Admin
-            </a>
-        </nav>
-
-        <div class="flex items-center gap-1">
-            <button id="searchToggle" class="md:hidden p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i class="fas fa-search"></i></button>
-
-            <div class="hidden md:flex items-center gap-1 px-2 py-1 bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full">
-                <i class="fas fa-globe text-xs text-slate-400"></i>
-                <select id="languageSelect" class="bg-transparent border-none text-xs font-semibold outline-none cursor-pointer text-slate-800 dark:text-slate-100">
-                    <option value="en">EN</option><option value="es">ES</option><option value="fr">FR</option>
-                </select>
+    <header id="mainHeader"
+        class="sticky top-0 z-40 bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700 transition-shadow">
+        <div class="max-w-7xl mx-auto px-5 flex items-center justify-between h-16 gap-3">
+            <div class="text-xl font-bold tracking-tight cursor-pointer flex items-center gap-1 shrink-0" id="homeLink">
+                <i class="fas fa-couch text-brand-600 dark:text-brand-400 text-lg"></i>
+                Furni<span class="text-brand-600 dark:text-brand-400">Craft</span>
             </div>
 
-            <button id="themeToggle" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Toggle theme">
-                <i class="fas fa-moon dark:hidden"></i>
-                <i class="fas fa-sun hidden dark:inline"></i>
-            </button>
+            <div class="flex-1 min-w-0 max-w-sm relative hidden md:block" id="searchWrapper">
+                <div
+                    class="flex items-center bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full pl-4 pr-1 py-1 focus-within:border-brand-500 focus-within:ring-4 focus-within:ring-brand-500/15 dark:focus-within:bg-slate-800 transition">
+                    <i class="fas fa-search text-slate-400 text-sm"></i>
+                    <input type="text" id="searchInput" placeholder="Search..." autocomplete="off"
+                        class="flex-1 min-w-0 bg-transparent border-none px-2 py-1 text-sm outline-none text-slate-800 dark:text-slate-100 placeholder-slate-400">
+                    <button id="searchBtn"
+                        class="bg-brand-600 hover:bg-brand-700 text-white rounded-full w-8 h-8 flex items-center justify-center transition"><i
+                            class="fas fa-arrow-right text-xs"></i></button>
+                </div>
+                <div id="searchSuggestions"
+                    class="hidden absolute top-full mt-2 left-0 right-0 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl max-h-96 overflow-y-auto z-50">
+                </div>
+            </div>
 
-            <button id="compareOpen" class="relative p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition hidden sm:block">
-                <i class="fas fa-balance-scale"></i>
-                <span id="compareCount" class="hidden absolute top-0 right-0 bg-brand-600 text-white text-[0.55rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
-            </button>
+            <nav class="hidden lg:flex gap-4 items-center text-sm font-medium">
+                <a href="#home"
+                    class="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">Home</a>
+                <a href="#products"
+                    class="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">Products</a>
+                <a href="#categories"
+                    class="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">Categories</a>
+                <a href="#dashboard" id="dashboardNav" style="display:none;"
+                    class="text-brand-600 dark:text-brand-400 font-semibold bg-brand-50 dark:bg-brand-900/30 px-3 py-1 rounded-full hover:bg-brand-600 hover:text-white transition">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </a>
+                <a href="#admin" id="adminNav" style="display:none;"
+                    class="bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-3 py-1 rounded-full font-bold hover:from-amber-600 hover:to-yellow-700 transition">
+                    <i class="fas fa-crown"></i> Admin
+                </a>
+            </nav>
 
-            <button id="wishlistOpen" class="relative p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
-                <i class="fas fa-heart"></i>
-                <span id="wishlistCount" class="hidden absolute top-0 right-0 bg-red-500 text-white text-[0.55rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
-            </button>
+            <div class="flex items-center gap-1">
+                <button id="searchToggle"
+                    class="md:hidden p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i
+                        class="fas fa-search"></i></button>
 
-            <button id="cartOpen" class="relative p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
-                <i class="fas fa-shopping-bag"></i>
-                <span id="cartCount" class="hidden absolute top-0 right-0 bg-red-500 text-white text-[0.55rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
-            </button>
-
-            <!-- Auth -->
-            <div class="relative">
-                <div id="authActionsGuest" class="flex gap-2">
-                    <button id="navLoginBtn" class="text-sm font-semibold px-3 py-1.5 rounded-full border border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400 hover:bg-brand-600 hover:text-white transition hidden sm:inline-flex">Login</button>
-                    <button id="navSignupBtn" class="text-sm font-semibold px-3 py-1.5 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition hidden sm:inline-flex">Sign Up</button>
+                <div
+                    class="hidden md:flex items-center gap-1 px-2 py-1 bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full">
+                    <i class="fas fa-globe text-xs text-slate-400"></i>
+                    <select id="languageSelect"
+                        class="bg-transparent border-none text-xs font-semibold outline-none cursor-pointer text-slate-800 dark:text-slate-100">
+                        <option value="en">EN</option>
+                        <option value="es">ES</option>
+                        <option value="fr">FR</option>
+                    </select>
                 </div>
 
-                <div id="userAvatar" style="display:none;" class="flex items-center gap-2 cursor-pointer px-1 py-1 pr-3 bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full hover:bg-brand-50 dark:hover:bg-brand-900/30 transition group">
-                    <div id="avatarInitials" class="w-7 h-7 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white font-bold text-xs flex items-center justify-center">?</div>
-                    <span id="userNameDisplay" class="text-xs font-medium hidden sm:inline">User</span>
-                    <i class="fas fa-chevron-down text-[0.6rem] opacity-60"></i>
+                <button id="themeToggle"
+                    class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                    title="Toggle theme">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
 
-                    <div id="userDropdown" style="display:none;" class="absolute top-full right-0 mt-2 w-64 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                        <div class="p-3 border-b border-slate-200 dark:border-slate-700 mb-1">
-                            <div id="dropdownName" class="font-bold text-sm">User</div>
-                            <div id="dropdownEmail" class="text-xs text-slate-500">user@example.com</div>
-                            <span id="dropdownRole" class="inline-block mt-1 px-2 py-0.5 rounded-full text-[0.65rem] font-bold uppercase tracking-wider bg-brand-50 text-brand-600 dark:bg-brand-900/40 dark:text-brand-300">customer</span>
+                <button id="compareOpen"
+                    class="relative p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition hidden sm:block">
+                    <i class="fas fa-balance-scale"></i>
+                    <span id="compareCount"
+                        class="hidden absolute top-0 right-0 bg-brand-600 text-white text-[0.55rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <button id="wishlistOpen"
+                    class="relative p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                    <i class="fas fa-heart"></i>
+                    <span id="wishlistCount"
+                        class="hidden absolute top-0 right-0 bg-red-500 text-white text-[0.55rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <button id="cartOpen"
+                    class="relative p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cartCount"
+                        class="hidden absolute top-0 right-0 bg-red-500 text-white text-[0.55rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <!-- Auth -->
+                <div class="relative">
+                    <div id="authActionsGuest" class="flex gap-2">
+                        <button id="navLoginBtn"
+                            class="text-sm font-semibold px-3 py-1.5 rounded-full border border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400 hover:bg-brand-600 hover:text-white transition hidden sm:inline-flex">Login</button>
+                        <button id="navSignupBtn"
+                            class="text-sm font-semibold px-3 py-1.5 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition hidden sm:inline-flex">Sign
+                            Up</button>
+                    </div>
+
+                    <div id="userAvatar" style="display:none;"
+                        class="flex items-center gap-2 cursor-pointer px-1 py-1 pr-3 bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full hover:bg-brand-50 dark:hover:bg-brand-900/30 transition group">
+                        <div id="avatarInitials"
+                            class="w-7 h-7 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white font-bold text-xs flex items-center justify-center">
+                            ?</div>
+                        <span id="userNameDisplay" class="text-xs font-medium hidden sm:inline">User</span>
+                        <i class="fas fa-chevron-down text-[0.6rem] opacity-60"></i>
+
+                        <div id="userDropdown" style="display:none;"
+                            class="absolute top-full right-0 mt-2 w-64 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                            <div class="p-3 border-b border-slate-200 dark:border-slate-700 mb-1">
+                                <div id="dropdownName" class="font-bold text-sm">User</div>
+                                <div id="dropdownEmail" class="text-xs text-slate-500">user@example.com</div>
+                                <span id="dropdownRole"
+                                    class="inline-block mt-1 px-2 py-0.5 rounded-full text-[0.65rem] font-bold uppercase tracking-wider bg-brand-50 text-brand-600 dark:bg-brand-900/40 dark:text-brand-300">customer</span>
+                            </div>
+                            <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 hover:translate-x-1 cursor-pointer transition"
+                                id="ddDashboard"><i class="fas fa-th-large w-4 text-center"></i> Dashboard</div>
+                            <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 hover:translate-x-1 cursor-pointer transition"
+                                id="ddProfile"><i class="fas fa-user w-4 text-center"></i> Profile</div>
+                            <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 hover:translate-x-1 cursor-pointer transition"
+                                id="ddOrders"><i class="fas fa-box w-4 text-center"></i> Orders</div>
+                            <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 hover:translate-x-1 cursor-pointer transition"
+                                id="ddWishlist"><i class="fas fa-heart w-4 text-center"></i> Wishlist</div>
+                            <div id="ddAdminDivider" style="display:none;"
+                                class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
+                            <div id="ddAdminPanel" style="display:none;"
+                                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-bold text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:translate-x-1 cursor-pointer transition">
+                                <i class="fas fa-crown w-4 text-center"></i> Admin Panel</div>
+                            <div class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
+                            <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:translate-x-1 cursor-pointer transition"
+                                id="ddLogout"><i class="fas fa-sign-out-alt w-4 text-center"></i> Logout</div>
                         </div>
-                        <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 hover:translate-x-1 cursor-pointer transition" id="ddDashboard"><i class="fas fa-th-large w-4 text-center"></i> Dashboard</div>
-                        <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 hover:translate-x-1 cursor-pointer transition" id="ddProfile"><i class="fas fa-user w-4 text-center"></i> Profile</div>
-                        <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 hover:translate-x-1 cursor-pointer transition" id="ddOrders"><i class="fas fa-box w-4 text-center"></i> Orders</div>
-                        <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 dark:hover:text-brand-400 hover:translate-x-1 cursor-pointer transition" id="ddWishlist"><i class="fas fa-heart w-4 text-center"></i> Wishlist</div>
-                        <div id="ddAdminDivider" style="display:none;" class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
-                        <div id="ddAdminPanel" style="display:none;" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-bold text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:translate-x-1 cursor-pointer transition"><i class="fas fa-crown w-4 text-center"></i> Admin Panel</div>
-                        <div class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
-                        <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:translate-x-1 cursor-pointer transition" id="ddLogout"><i class="fas fa-sign-out-alt w-4 text-center"></i> Logout</div>
                     </div>
                 </div>
+
+                <button id="hamburgerBtn"
+                    class="lg:hidden p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i
+                        class="fas fa-bars"></i></button>
             </div>
-
-            <button id="hamburgerBtn" class="lg:hidden p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i class="fas fa-bars"></i></button>
         </div>
-    </div>
 
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden lg:hidden bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 p-5 flex-col gap-2 absolute top-full left-0 right-0 shadow-2xl z-30">
-        <a href="#home" class="font-medium text-slate-600 dark:text-slate-300 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer">Home</a>
-        <a href="#products" class="font-medium text-slate-600 dark:text-slate-300 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer">Products</a>
-        <a href="#categories" class="font-medium text-slate-600 dark:text-slate-300 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer">Categories</a>
-        <a href="#dashboard" id="mobileDashboardNav" style="display:none;" class="font-medium text-brand-600 dark:text-brand-400 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer"><i class="fas fa-th-large"></i> Dashboard</a>
-        <a href="#admin" id="mobileAdminNav" style="display:none;" class="font-medium text-amber-600 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer"><i class="fas fa-crown"></i> Admin</a>
-        <div class="flex gap-2 mt-2">
-            <button class="flex-1 text-sm font-semibold px-3 py-2 rounded-full border border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400 hover:bg-brand-600 hover:text-white transition" id="mobileSignIn">Sign In</button>
-            <button class="flex-1 text-sm font-semibold px-3 py-2 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition" id="mobileSignUp">Sign Up</button>
+        <!-- Mobile menu -->
+        <div id="mobileMenu"
+            class="hidden lg:hidden bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 p-5 flex-col gap-2 absolute top-full left-0 right-0 shadow-2xl z-30">
+            <a href="#home"
+                class="font-medium text-slate-600 dark:text-slate-300 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer">Home</a>
+            <a href="#products"
+                class="font-medium text-slate-600 dark:text-slate-300 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer">Products</a>
+            <a href="#categories"
+                class="font-medium text-slate-600 dark:text-slate-300 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer">Categories</a>
+            <a href="#dashboard" id="mobileDashboardNav" style="display:none;"
+                class="font-medium text-brand-600 dark:text-brand-400 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer"><i
+                    class="fas fa-th-large"></i> Dashboard</a>
+            <a href="#admin" id="mobileAdminNav" style="display:none;"
+                class="font-medium text-amber-600 py-2 border-b border-slate-200 dark:border-slate-700 cursor-pointer"><i
+                    class="fas fa-crown"></i> Admin</a>
+            <div class="flex gap-2 mt-2">
+                <button
+                    class="flex-1 text-sm font-semibold px-3 py-2 rounded-full border border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400 hover:bg-brand-600 hover:text-white transition"
+                    id="mobileSignIn">Sign In</button>
+                <button
+                    class="flex-1 text-sm font-semibold px-3 py-2 rounded-full bg-brand-600 text-white hover:bg-brand-700 transition"
+                    id="mobileSignUp">Sign Up</button>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
-<!-- ============================================================
+    <!-- ============================================================
      AUTH MODAL
      ============================================================ -->
-<div id="authModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white dark:bg-slate-800 rounded-3xl w-full max-w-md shadow-2xl border border-slate-200 dark:border-slate-700 p-8 relative max-h-[calc(100vh-2rem)] overflow-y-auto animate-fadeInUp">
-        <button id="authClose" class="absolute right-3 top-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full w-9 h-9 flex items-center justify-center text-slate-400 hover:bg-red-500 hover:text-white hover:rotate-90 transition-all"><i class="fas fa-times"></i></button>
+    <div id="authModal"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 overflow-y-auto">
+        <div
+            class="bg-white dark:bg-slate-800 rounded-3xl w-full max-w-md shadow-2xl border border-slate-200 dark:border-slate-700 p-8 relative max-h-[calc(100vh-2rem)] overflow-y-auto animate-fadeInUp">
+            <button id="authClose"
+                class="absolute right-3 top-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full w-9 h-9 flex items-center justify-center text-slate-400 hover:bg-red-500 hover:text-white hover:rotate-90 transition-all"><i
+                    class="fas fa-times"></i></button>
 
-        <div class="flex gap-2 mb-6 border-b-2 border-slate-200 dark:border-slate-700 pb-2">
-            <button class="auth-tab active font-semibold text-sm pb-1 border-b-[3px] border-transparent text-slate-400 data-[active=true]:text-brand-600 data-[active=true]:border-brand-600 transition" data-tab="login" data-active="true">Sign In</button>
-            <button class="auth-tab font-semibold text-sm pb-1 border-b-[3px] border-transparent text-slate-400 data-[active=true]:text-brand-600 data-[active=true]:border-brand-600 transition" data-tab="signup">Sign Up</button>
-            <button class="auth-tab font-semibold text-sm pb-1 border-b-[3px] border-transparent text-slate-400 data-[active=true]:text-brand-600 data-[active=true]:border-brand-600 transition hidden" data-tab="forgot">Reset</button>
-        </div>
+            <div class="flex gap-2 mb-6 border-b-2 border-slate-200 dark:border-slate-700 pb-2">
+                <button
+                    class="auth-tab active font-semibold text-sm pb-1 border-b-[3px] border-transparent text-slate-400 data-[active=true]:text-brand-600 data-[active=true]:border-brand-600 transition"
+                    data-tab="login" data-active="true">Sign In</button>
+                <button
+                    class="auth-tab font-semibold text-sm pb-1 border-b-[3px] border-transparent text-slate-400 data-[active=true]:text-brand-600 data-[active=true]:border-brand-600 transition"
+                    data-tab="signup">Sign Up</button>
+                <button
+                    class="auth-tab font-semibold text-sm pb-1 border-b-[3px] border-transparent text-slate-400 data-[active=true]:text-brand-600 data-[active=true]:border-brand-600 transition hidden"
+                    data-tab="forgot">Reset</button>
+            </div>
 
-        <!-- Login form -->
-        <div id="formSignin" class="auth-form">
-            <h2 class="text-2xl font-extrabold mb-5 tracking-tight">Welcome Back</h2>
-            <form id="signinFormElement" novalidate>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Email Address</label>
-                    <input type="email" id="signinEmail" placeholder="you@example.com" autocomplete="email" required class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
-                    <span class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity" id="signinEmailError"></span>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Password</label>
-                    <div class="relative">
-                        <input type="password" id="signinPassword" placeholder="Enter your password" autocomplete="current-password" required class="w-full px-4 py-3 pr-12 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
-                        <button type="button" class="toggle-pwd absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-600 p-1.5 rounded-md transition" data-target="signinPassword"><i class="fas fa-eye"></i></button>
+            <!-- Login form -->
+            <div id="formSignin" class="auth-form">
+                <h2 class="text-2xl font-extrabold mb-5 tracking-tight">Welcome Back</h2>
+                <form id="signinFormElement" novalidate>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Email
+                            Address</label>
+                        <input type="email" id="signinEmail" placeholder="you@example.com" autocomplete="email" required
+                            class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+                        <span
+                            class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity"
+                            id="signinEmailError"></span>
                     </div>
-                    <span class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity" id="signinPasswordError"></span>
-                </div>
-                <div class="flex justify-between items-center my-2 mb-3.5 text-sm">
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="rememberMe" class="accent-brand-600"> <span>Remember me</span></label>
-                    <button type="button" id="switchToForgot" class="text-brand-600 dark:text-brand-400 font-medium hover:underline">Forgot password?</button>
-                </div>
-                <button type="submit" id="signinSubmitBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-500 bg-[length:200%_100%] text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-500/40 hover:bg-[position:100%_0] transition-all">Sign In</button>
-                <div class="mt-5 text-center text-sm text-slate-500">Don't have an account? <button type="button" id="switchToSignup" class="text-brand-600 dark:text-brand-400 font-semibold hover:underline">Sign Up</button></div>
-            </form>
-        </div>
-
-        <!-- Signup form -->
-        <div id="formSignup" class="auth-form hidden">
-            <h2 class="text-2xl font-extrabold mb-5 tracking-tight">Create Your Account</h2>
-            <form id="signupFormElement" novalidate>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Full Name</label>
-                    <input type="text" id="signupName" placeholder="Jane Doe" autocomplete="name" required class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
-                    <span class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity" id="signupNameError"></span>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Email Address</label>
-                    <input type="email" id="signupEmail" placeholder="you@example.com" required class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
-                    <span class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity" id="signupEmailError"></span>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Phone Number</label>
-                    <input type="tel" id="signupPhone" placeholder="+1 (555) 000-0000" required class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
-                    <span class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity" id="signupPhoneError"></span>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Password</label>
-                    <div class="relative">
-                        <input type="password" id="signupPassword" placeholder="Min 8 chars, mixed case + number" required class="w-full px-4 py-3 pr-12 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
-                        <button type="button" class="toggle-pwd absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-600 p-1.5 rounded-md transition" data-target="signupPassword"><i class="fas fa-eye"></i></button>
-                    </div>
-                    <div id="pwdStrength" class="mt-1.5 hidden">
-                        <div class="flex gap-1 mb-1">
-                            <span class="pwd-strength-bar flex-1 h-1 rounded bg-slate-200 dark:bg-slate-700 transition-colors"></span>
-                            <span class="pwd-strength-bar flex-1 h-1 rounded bg-slate-200 dark:bg-slate-700 transition-colors"></span>
-                            <span class="pwd-strength-bar flex-1 h-1 rounded bg-slate-200 dark:bg-slate-700 transition-colors"></span>
-                            <span class="pwd-strength-bar flex-1 h-1 rounded bg-slate-200 dark:bg-slate-700 transition-colors"></span>
+                    <div class="mb-4">
+                        <label
+                            class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Password</label>
+                        <div class="relative">
+                            <input type="password" id="signinPassword" placeholder="Enter your password"
+                                autocomplete="current-password" required
+                                class="w-full px-4 py-3 pr-12 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+                            <button type="button"
+                                class="toggle-pwd absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-600 p-1.5 rounded-md transition"
+                                data-target="signinPassword"><i class="fas fa-eye"></i></button>
                         </div>
-                        <span class="pwd-strength-text text-xs text-slate-500">Enter a password</span>
+                        <span
+                            class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity"
+                            id="signinPasswordError"></span>
                     </div>
-                    <span class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity" id="signupPasswordError"></span>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Confirm Password</label>
-                    <div class="relative">
-                        <input type="password" id="signupConfirmPassword" placeholder="Re-enter your password" required class="w-full px-4 py-3 pr-12 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
-                        <button type="button" class="toggle-pwd absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-600 p-1.5 rounded-md transition" data-target="signupConfirmPassword"><i class="fas fa-eye"></i></button>
+                    <div class="flex justify-between items-center my-2 mb-3.5 text-sm">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="rememberMe"
+                                class="accent-brand-600"> <span>Remember me</span></label>
+                        <button type="button" id="switchToForgot"
+                            class="text-brand-600 dark:text-brand-400 font-medium hover:underline">Forgot
+                            password?</button>
                     </div>
-                    <span class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity" id="signupConfirmPasswordError"></span>
-                </div>
-                <div class="mb-4">
-                    <label class="flex items-start gap-2 text-sm cursor-pointer">
-                        <input type="checkbox" id="termsAgree" required class="mt-1 accent-brand-600">
-                        <span>I agree to the <a href="#" class="text-brand-600 dark:text-brand-400 hover:underline">Terms &amp; Conditions</a> and <a href="#" class="text-brand-600 dark:text-brand-400 hover:underline">Privacy Policy</a>.</span>
-                    </label>
-                </div>
-                <button type="submit" id="signupSubmitBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-500 text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-500/40 transition-all">Create Account</button>
-                <div class="mt-5 text-center text-sm text-slate-500">Already have an account? <button type="button" id="switchToSignin" class="text-brand-600 dark:text-brand-400 font-semibold hover:underline">Sign In</button></div>
-            </form>
-        </div>
+                    <button type="submit" id="signinSubmitBtn"
+                        class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-500 bg-[length:200%_100%] text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-500/40 hover:bg-[position:100%_0] transition-all">Sign
+                        In</button>
+                    <div class="mt-5 text-center text-sm text-slate-500">Don't have an account? <button type="button"
+                            id="switchToSignup"
+                            class="text-brand-600 dark:text-brand-400 font-semibold hover:underline">Sign Up</button>
+                    </div>
+                </form>
+            </div>
 
-        <!-- Forgot form -->
-        <div id="formForgot" class="auth-form hidden">
-            <h2 class="text-2xl font-extrabold mb-5 tracking-tight">Reset Password</h2>
-            <p class="text-xs text-slate-500 bg-slate-100 dark:bg-slate-700 p-3 rounded-lg mb-4">Demo mode — no email will actually be sent. This is a frontend-only password reset flow.</p>
-            <form id="forgotFormElement" novalidate>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Email Address</label>
-                    <input type="email" id="forgotEmail" placeholder="you@example.com" required class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
-                    <span class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity" id="forgotEmailError"></span>
-                </div>
-                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-500 text-white font-bold text-sm hover:-translate-y-0.5 transition-all">Send Reset Link</button>
-                <div class="mt-5 text-center text-sm text-slate-500">Remembered? <button type="button" id="switchFromForgot" class="text-brand-600 dark:text-brand-400 font-semibold hover:underline">Back to Sign In</button></div>
-            </form>
+            <!-- Signup form -->
+            <div id="formSignup" class="auth-form hidden">
+                <h2 class="text-2xl font-extrabold mb-5 tracking-tight">Create Your Account</h2>
+                <form id="signupFormElement" novalidate>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Full
+                            Name</label>
+                        <input type="text" id="signupName" placeholder="Jane Doe" autocomplete="name" required
+                            class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+                        <span
+                            class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity"
+                            id="signupNameError"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Email
+                            Address</label>
+                        <input type="email" id="signupEmail" placeholder="you@example.com" required
+                            class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+                        <span
+                            class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity"
+                            id="signupEmailError"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Phone
+                            Number</label>
+                        <input type="tel" id="signupPhone" placeholder="+1 (555) 000-0000" required
+                            class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+                        <span
+                            class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity"
+                            id="signupPhoneError"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label
+                            class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Password</label>
+                        <div class="relative">
+                            <input type="password" id="signupPassword" placeholder="Min 8 chars, mixed case + number"
+                                required
+                                class="w-full px-4 py-3 pr-12 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+                            <button type="button"
+                                class="toggle-pwd absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-600 p-1.5 rounded-md transition"
+                                data-target="signupPassword"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <div id="pwdStrength" class="mt-1.5 hidden">
+                            <div class="flex gap-1 mb-1">
+                                <span
+                                    class="pwd-strength-bar flex-1 h-1 rounded bg-slate-200 dark:bg-slate-700 transition-colors"></span>
+                                <span
+                                    class="pwd-strength-bar flex-1 h-1 rounded bg-slate-200 dark:bg-slate-700 transition-colors"></span>
+                                <span
+                                    class="pwd-strength-bar flex-1 h-1 rounded bg-slate-200 dark:bg-slate-700 transition-colors"></span>
+                                <span
+                                    class="pwd-strength-bar flex-1 h-1 rounded bg-slate-200 dark:bg-slate-700 transition-colors"></span>
+                            </div>
+                            <span class="pwd-strength-text text-xs text-slate-500">Enter a password</span>
+                        </div>
+                        <span
+                            class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity"
+                            id="signupPasswordError"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Confirm
+                            Password</label>
+                        <div class="relative">
+                            <input type="password" id="signupConfirmPassword" placeholder="Re-enter your password"
+                                required
+                                class="w-full px-4 py-3 pr-12 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+                            <button type="button"
+                                class="toggle-pwd absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-600 p-1.5 rounded-md transition"
+                                data-target="signupConfirmPassword"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <span
+                            class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity"
+                            id="signupConfirmPasswordError"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label class="flex items-start gap-2 text-sm cursor-pointer">
+                            <input type="checkbox" id="termsAgree" required class="mt-1 accent-brand-600">
+                            <span>I agree to the <a href="#"
+                                    class="text-brand-600 dark:text-brand-400 hover:underline">Terms &amp;
+                                    Conditions</a> and <a href="#"
+                                    class="text-brand-600 dark:text-brand-400 hover:underline">Privacy
+                                    Policy</a>.</span>
+                        </label>
+                    </div>
+                    <button type="submit" id="signupSubmitBtn"
+                        class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-500 text-white font-bold text-sm hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-500/40 transition-all">Create
+                        Account</button>
+                    <div class="mt-5 text-center text-sm text-slate-500">Already have an account? <button type="button"
+                            id="switchToSignin"
+                            class="text-brand-600 dark:text-brand-400 font-semibold hover:underline">Sign In</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Forgot form -->
+            <div id="formForgot" class="auth-form hidden">
+                <h2 class="text-2xl font-extrabold mb-5 tracking-tight">Reset Password</h2>
+                <p class="text-xs text-slate-500 bg-slate-100 dark:bg-slate-700 p-3 rounded-lg mb-4">Demo mode — no
+                    email will actually be sent. This is a frontend-only password reset flow.</p>
+                <form id="forgotFormElement" novalidate>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Email
+                            Address</label>
+                        <input type="email" id="forgotEmail" placeholder="you@example.com" required
+                            class="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+                        <span
+                            class="error-message block min-h-[18px] text-red-500 text-xs mt-1 opacity-0 transition-opacity"
+                            id="forgotEmailError"></span>
+                    </div>
+                    <button type="submit"
+                        class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-accent-500 text-white font-bold text-sm hover:-translate-y-0.5 transition-all">Send
+                        Reset Link</button>
+                    <div class="mt-5 text-center text-sm text-slate-500">Remembered? <button type="button"
+                            id="switchFromForgot"
+                            class="text-brand-600 dark:text-brand-400 font-semibold hover:underline">Back to Sign
+                            In</button></div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- ============================================================
+    <!-- ============================================================
      CART SIDEBAR
      ============================================================ -->
-<div id="cartOverlay" class="fixed inset-0 bg-black/40 z-50 hidden"></div>
-<aside id="cartSidebar" class="fixed top-0 right-0 w-full sm:w-96 max-w-full h-full bg-white dark:bg-slate-800 z-[60] shadow-2xl translate-x-full transition-transform duration-300 flex flex-col">
-    <div class="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700">
-        <h3 class="font-bold flex items-center gap-2"><i class="fas fa-shopping-bag"></i> Your Cart</h3>
-        <button id="cartClose" class="w-9 h-9 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 hover:bg-red-500 hover:text-white transition"><i class="fas fa-times"></i></button>
-    </div>
-    <div id="cartItems" class="flex-1 overflow-y-auto p-5">
-        <div class="text-center py-8 text-slate-400"><i class="fas fa-box-open text-3xl mb-2 block"></i><p>Your cart is empty</p></div>
-    </div>
-    <div id="cartFooter" style="display:none;" class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
-        <div class="flex justify-between font-bold mb-3"><span>Total</span><span id="cartTotal">$0.00</span></div>
-        <button id="checkoutBtn" class="w-full py-3 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold flex items-center justify-center gap-2 transition"><i class="fas fa-lock"></i> Checkout</button>
-    </div>
-</aside>
+    <div id="cartOverlay" class="fixed inset-0 bg-black/40 z-50 hidden"></div>
+    <aside id="cartSidebar"
+        class="fixed top-0 right-0 w-full sm:w-96 max-w-full h-full bg-white dark:bg-slate-800 z-[60] shadow-2xl translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700">
+            <h3 class="font-bold flex items-center gap-2"><i class="fas fa-shopping-bag"></i> Your Cart</h3>
+            <button id="cartClose"
+                class="w-9 h-9 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 hover:bg-red-500 hover:text-white transition"><i
+                    class="fas fa-times"></i></button>
+        </div>
+        <div id="cartItems" class="flex-1 overflow-y-auto p-5">
+            <div class="text-center py-8 text-slate-400"><i class="fas fa-box-open text-3xl mb-2 block"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div id="cartFooter" style="display:none;"
+            class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+            <div class="flex justify-between font-bold mb-3"><span>Total</span><span id="cartTotal">$0.00</span></div>
+            <button id="checkoutBtn"
+                class="w-full py-3 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold flex items-center justify-center gap-2 transition"><i
+                    class="fas fa-lock"></i> Checkout</button>
+        </div>
+    </aside>
 
-<!-- Confetti -->
-<div id="confettiContainer" class="fixed inset-0 pointer-events-none z-[200] overflow-hidden"></div>
+    <!-- Confetti -->
+    <div id="confettiContainer" class="fixed inset-0 pointer-events-none z-[200] overflow-hidden"></div>
 
-<!-- Toasts -->
-<div id="toastContainer" class="fixed bottom-5 right-5 flex flex-col gap-2 z-[300] pointer-events-none max-w-[calc(100vw-40px)] w-80"></div>
+    <!-- Toasts -->
+    <div id="toastContainer"
+        class="fixed bottom-5 right-5 flex flex-col gap-2 z-[300] pointer-events-none max-w-[calc(100vw-40px)] w-80">
+    </div>
 
-<!-- ============================================================
+    <!-- ============================================================
      MAIN
      ============================================================ -->
-<main id="mainSections">
-    <!-- Hero -->
-    <section id="home" class="py-10 md:py-14">
-        <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-10 items-center">
-            <div class="text-center md:text-left">
-                <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-4">Modern furniture <br><span class="text-brand-600 dark:text-brand-400">for modern living</span></h1>
-                <p class="text-slate-500 dark:text-slate-400 text-base max-w-md mx-auto md:mx-0 mb-6">Curated with precision, crafted for comfort. Discover sustainable, timeless pieces that elevate every room.</p>
-                <div class="flex gap-3 flex-wrap justify-center md:justify-start">
-                    <a href="#products" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-5 py-3 rounded-full hover:-translate-y-0.5 hover:shadow-lg transition"><i class="fas fa-store"></i> Shop Collection</a>
-                    <a href="#about" class="inline-flex items-center gap-2 border-2 border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400 hover:bg-brand-600 hover:text-white font-semibold text-sm px-5 py-3 rounded-full transition">Learn More</a>
+    <main id="mainSections">
+        <!-- Hero -->
+        <section id="home" class="py-10 md:py-14">
+            <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-10 items-center">
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-4">Modern furniture <br><span
+                            class="text-brand-600 dark:text-brand-400">for modern living</span></h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-base max-w-md mx-auto md:mx-0 mb-6">Curated with
+                        precision, crafted for comfort. Discover sustainable, timeless pieces that elevate every room.
+                    </p>
+                    <div class="flex gap-3 flex-wrap justify-center md:justify-start">
+                        <a href="#products"
+                            class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-5 py-3 rounded-full hover:-translate-y-0.5 hover:shadow-lg transition"><i
+                                class="fas fa-store"></i> Shop Collection</a>
+                        <a href="#about"
+                            class="inline-flex items-center gap-2 border-2 border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400 hover:bg-brand-600 hover:text-white font-semibold text-sm px-5 py-3 rounded-full transition">Learn
+                            More</a>
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80"
+                        alt="Hero" class="w-full h-56 md:h-80 object-cover">
                 </div>
             </div>
-            <div class="rounded-2xl overflow-hidden shadow-lg">
-                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80" alt="Hero" class="w-full h-56 md:h-80 object-cover">
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Products -->
-    <section id="products" class="py-14 md:py-20">
+        <!-- Products -->
+        <section id="products" class="py-14 md:py-20">
+            <div class="max-w-7xl mx-auto px-5">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-3 flex-wrap">
+                    Featured Products
+                    <span
+                        class="bg-green-500 text-white text-[0.65rem] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">New</span>
+                </h2>
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section id="categories" class="py-14 md:py-20 bg-slate-50 dark:bg-slate-800/50">
+            <div class="max-w-7xl mx-auto px-5">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6">Shop by Category</h2>
+                <div id="categoryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                    <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                        data-category="living"><i
+                            class="fas fa-couch text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i>
+                        <h4 class="font-semibold text-sm">Living Room</h4><span
+                            class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span>
+                    </div>
+                    <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                        data-category="bedroom"><i
+                            class="fas fa-bed text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i>
+                        <h4 class="font-semibold text-sm">Bedroom</h4><span
+                            class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span>
+                    </div>
+                    <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                        data-category="dining"><i
+                            class="fas fa-utensils text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i>
+                        <h4 class="font-semibold text-sm">Dining</h4><span
+                            class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span>
+                    </div>
+                    <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                        data-category="office"><i
+                            class="fas fa-chair text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i>
+                        <h4 class="font-semibold text-sm">Office</h4><span
+                            class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span>
+                    </div>
+                    <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                        data-category="lighting"><i
+                            class="fas fa-lamp text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i>
+                        <h4 class="font-semibold text-sm">Lighting</h4><span
+                            class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span>
+                    </div>
+                    <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                        data-category="decor"><i
+                            class="fas fa-rug text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i>
+                        <h4 class="font-semibold text-sm">Decor</h4><span
+                            class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="py-14 md:py-20">
+            <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6">Our Story</h2>
+                    <p class="text-slate-500 dark:text-slate-400 mb-4">Founded in 2010, FurniCraft combines Scandinavian
+                        simplicity with artisanal craftsmanship.</p>
+                    <p class="text-slate-500 dark:text-slate-400 mb-5">We believe furniture should be both beautiful and
+                        functional.</p>
+                    <a href="#products"
+                        class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-4 py-2 rounded-full transition"><i
+                            class="fas fa-arrow-right"></i> Explore Collection</a>
+                </div>
+                <img src="https://images.unsplash.com/photo-1605773527852-c546a8584ea3?auto=format&fit=crop&w=600&q=80"
+                    alt="Craftsmanship" class="rounded-2xl shadow-lg w-full h-72 object-cover">
+            </div>
+        </section>
+    </main>
+
+    <!-- Category Page -->
+    <div id="categoryPage" class="hidden py-10 pb-16 min-h-[60vh]">
         <div class="max-w-7xl mx-auto px-5">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-3 flex-wrap">
-                Featured Products
-                <span class="bg-green-500 text-white text-[0.65rem] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">New</span>
-            </h2>
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+            <button id="backFromCategory"
+                class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 font-medium mb-4 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 hover:text-brand-600 hover:border-brand-500 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition text-sm">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <h2 id="categoryPageTitle" class="text-2xl md:text-3xl font-bold mb-1">Living <span
+                    class="text-brand-600 dark:text-brand-400">Collection</span></h2>
+            <div id="categoryPageMeta" class="text-slate-400 mb-6 text-sm"></div>
+
+            <div class="flex gap-3 items-center mb-6 flex-wrap">
+                <label class="text-sm text-slate-400 font-semibold">Sort by:</label>
+                <select id="categorySort"
+                    class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold cursor-pointer outline-none focus:border-brand-500 transition">
+                    <option value="default">Default</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="name">Name (A–Z)</option>
+                </select>
+                <span id="categoryCount" class="text-xs text-slate-400"></span>
+            </div>
+
+            <div id="categoryProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboardWrapper" class="hidden min-h-[calc(100vh-4rem)]">
+        <div class="flex min-h-[calc(100vh-4rem)]">
+            <div id="sidebarOverlay" style="display:none;" class="fixed inset-0 bg-black/40 z-40 lg:hidden"></div>
+            <aside id="dashboardSidebar"
+                class="w-64 shrink-0 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 p-5 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto transition-all fixed lg:static -translate-x-full lg:translate-x-0 z-50">
+                <div
+                    class="text-center p-4 rounded-2xl bg-gradient-to-br from-brand-50 dark:from-brand-900/30 to-transparent mb-5">
+                    <div id="dashAvatar"
+                        class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white font-bold text-2xl flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-user"></i></div>
+                    <div id="sidebarUserName" class="font-bold text-sm">Guest</div>
+                    <div id="sidebarUserEmail" class="text-xs text-slate-400">guest@example.com</div>
+                </div>
+                <nav class="flex flex-col gap-1">
+                    <div class="dash-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-slate-500 dark:text-slate-400 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 hover:translate-x-1 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-brand-500 data-[active=true]:text-white"
+                        data-page="overview" data-active="true"><i class="fas fa-th-large"></i> Overview</div>
+                    <div class="dash-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-slate-500 dark:text-slate-400 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 hover:translate-x-1 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-brand-500 data-[active=true]:text-white"
+                        data-page="orders"><i class="fas fa-history"></i> Orders</div>
+                    <div class="dash-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-slate-500 dark:text-slate-400 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 hover:translate-x-1 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-brand-500 data-[active=true]:text-white"
+                        data-page="profile"><i class="fas fa-user-edit"></i> Profile</div>
+                    <div class="dash-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-slate-500 dark:text-slate-400 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 hover:translate-x-1 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-brand-500 data-[active=true]:text-white"
+                        data-page="wishlist"><i class="fas fa-heart"></i> Wishlist</div>
+                    <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
+                        <div id="logoutSidebarBtn"
+                            class="flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:translate-x-1">
+                            <i class="fas fa-sign-out-alt"></i> Sign Out</div>
+                    </div>
+                </nav>
+            </aside>
+            <div class="flex-1 p-5 md:p-8 overflow-x-hidden min-w-0">
+                <div class="gradient-hero text-white p-6 md:p-10 rounded-3xl mb-6">
+                    <div class="flex justify-between items-center flex-wrap gap-6">
+                        <div>
+                            <h1 class="text-2xl md:text-3xl font-extrabold mb-1 flex items-center gap-2 flex-wrap">Hey,
+                                <span id="dashGreeting">User</span> <span class="inline-block animate-wave">👋</span>
+                            </h1>
+                            <p class="opacity-90 text-sm">Here's what's happening with your account today.</p>
+                        </div>
+                        <div class="flex gap-6 flex-wrap">
+                            <div class="text-center">
+                                <div class="text-2xl font-extrabold" id="dashStatOrders">0</div>
+                                <div class="text-xs opacity-85">Orders</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-extrabold" id="dashStatPoints">0</div>
+                                <div class="text-xs opacity-85">Points</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-extrabold" id="dashStatWishlist">0</div>
+                                <div class="text-xs opacity-85">Wishlist</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div
+                        class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
+                        <div
+                            class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center mb-3 text-lg">
+                            <i class="fas fa-shopping-bag"></i></div>
+                        <div class="text-2xl font-extrabold" id="statOrders">0</div>
+                        <div class="text-xs text-slate-400 uppercase">Total Orders</div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
+                        <div
+                            class="w-11 h-11 rounded-xl bg-gradient-to-br from-green-500 to-green-600 text-white flex items-center justify-center mb-3 text-lg">
+                            <i class="fas fa-dollar-sign"></i></div>
+                        <div class="text-2xl font-extrabold" id="statSpent">$0</div>
+                        <div class="text-xs text-slate-400 uppercase">Total Spent</div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
+                        <div
+                            class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 text-white flex items-center justify-center mb-3 text-lg">
+                            <i class="fas fa-coins"></i></div>
+                        <div class="text-2xl font-extrabold" id="statPoints">0</div>
+                        <div class="text-xs text-slate-400 uppercase">Reward Points</div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
+                        <div
+                            class="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center mb-3 text-lg">
+                            <i class="fas fa-heart"></i></div>
+                        <div class="text-2xl font-extrabold" id="statWishlist">0</div>
+                        <div class="text-xs text-slate-400 uppercase">Wishlist</div>
+                    </div>
+                </div>
+
+                <div id="dashboardPages"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="adminModal"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-slate-100 dark:bg-slate-900 rounded-3xl w-full max-w-6xl shadow-2xl overflow-hidden">
+            <div
+                class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 flex justify-between items-center flex-wrap gap-3">
+                <h2 class="text-xl font-bold flex items-center gap-3"><i class="fas fa-crown text-amber-400"></i> Admin
+                    Control Panel <span
+                        class="bg-gradient-to-r from-amber-400 to-yellow-500 text-white text-[0.65rem] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Administrator</span>
+                </h2>
+                <button id="adminClose"
+                    class="w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-red-500 transition"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="grid lg:grid-cols-[220px_1fr] min-h-[500px]">
+                <div class="bg-slate-900 text-slate-400 p-4 flex lg:flex-col gap-1 overflow-x-auto">
+                    <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-accent-500 data-[active=true]:text-white"
+                        data-panel="dashboard" data-active="true"><i class="fas fa-chart-line w-4 text-center"></i>
+                        <span class="hidden lg:inline">Dashboard</span></div>
+                    <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0"
+                        data-panel="products"><i class="fas fa-box w-4 text-center"></i> <span
+                            class="hidden lg:inline">Products</span><span
+                            class="ml-auto bg-white/15 px-2 py-0.5 rounded-full text-[0.65rem] font-bold"
+                            id="adminProductCount">0</span></div>
+                    <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0"
+                        data-panel="orders"><i class="fas fa-shopping-bag w-4 text-center"></i> <span
+                            class="hidden lg:inline">Orders</span><span
+                            class="ml-auto bg-white/15 px-2 py-0.5 rounded-full text-[0.65rem] font-bold"
+                            id="adminOrderCount">0</span></div>
+                    <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0"
+                        data-panel="users"><i class="fas fa-users w-4 text-center"></i> <span
+                            class="hidden lg:inline">Users</span><span
+                            class="ml-auto bg-white/15 px-2 py-0.5 rounded-full text-[0.65rem] font-bold"
+                            id="adminUserCount">0</span></div>
+                </div>
+                <div id="adminContent" class="p-5 bg-slate-100 dark:bg-slate-900"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Form Modal -->
+    <div id="productFormModal" class="fixed inset-0 bg-black/70 z-[110] hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-brand-600 to-brand-500 text-white p-5">
+                <h3 id="productFormTitle" class="font-bold"><i class="fas fa-plus-circle"></i> Add Product</h3>
+            </div>
+            <form id="productForm">
+                <div class="p-6 space-y-4">
+                    <input type="hidden" id="productFormId">
+                    <div><label
+                            class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Name</label><input
+                            type="text" id="productFormName" required
+                            class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition">
+                    </div>
+                    <div><label
+                            class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Description</label><textarea
+                            id="productFormDesc" rows="2"
+                            class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label
+                                class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Price</label><input
+                                type="number" id="productFormPrice" step="0.01" required
+                                class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Old
+                                Price</label><input type="number" id="productFormOldPrice" step="0.01"
+                                class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label
+                                class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Stock</label><input
+                                type="number" id="productFormStock" required
+                                class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition">
+                        </div>
+                        <div><label
+                                class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Category</label>
+                            <select id="productFormCategory" required
+                                class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition">
+                                <option value="living">Living</option>
+                                <option value="bedroom">Bedroom</option>
+                                <option value="dining">Dining</option>
+                                <option value="office">Office</option>
+                                <option value="lighting">Lighting</option>
+                                <option value="decor">Decor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Image
+                            URL</label><input type="url" id="productFormImage" required
+                            class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition">
+                    </div>
+                </div>
+                <div class="flex gap-3 justify-end p-5 border-t border-slate-200 dark:border-slate-700">
+                    <button type="button" id="productFormCancel"
+                        class="px-5 py-2.5 rounded-full border-2 border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400 font-semibold text-sm hover:bg-brand-600 hover:text-white transition">Cancel</button>
+                    <button type="submit"
+                        class="px-5 py-2.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm flex items-center gap-2 transition"><i
+                            class="fas fa-save"></i> Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Newsletter + Footer -->
+    <section class="gradient-brand text-white py-9">
+        <div class="max-w-7xl mx-auto px-5 flex justify-between items-center flex-wrap gap-5">
+            <h2 class="text-xl font-bold"><i class="fas fa-envelope"></i> Subscribe</h2>
+            <form id="newsletterForm" class="flex gap-2 flex-wrap">
+                <input type="email" placeholder="Enter your email" required
+                    class="px-4 py-2.5 rounded-full border-none min-w-[220px] text-sm outline-none text-slate-800">
+                <button type="submit"
+                    class="bg-white text-brand-600 font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 hover:shadow-lg transition">Subscribe</button>
+            </form>
         </div>
     </section>
 
-    <!-- Categories -->
-    <section id="categories" class="py-14 md:py-20 bg-slate-50 dark:bg-slate-800/50">
+    <footer class="bg-slate-900 text-slate-300 py-9 pb-5">
         <div class="max-w-7xl mx-auto px-5">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6">Shop by Category</h2>
-            <div id="categoryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300" data-category="living"><i class="fas fa-couch text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i><h4 class="font-semibold text-sm">Living Room</h4><span class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span></div>
-                <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300" data-category="bedroom"><i class="fas fa-bed text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i><h4 class="font-semibold text-sm">Bedroom</h4><span class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span></div>
-                <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300" data-category="dining"><i class="fas fa-utensils text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i><h4 class="font-semibold text-sm">Dining</h4><span class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span></div>
-                <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300" data-category="office"><i class="fas fa-chair text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i><h4 class="font-semibold text-sm">Office</h4><span class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span></div>
-                <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300" data-category="lighting"><i class="fas fa-lamp text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i><h4 class="font-semibold text-sm">Lighting</h4><span class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span></div>
-                <div class="category-card bg-white dark:bg-slate-800 rounded-2xl p-4 text-center border border-slate-200 dark:border-slate-700 cursor-pointer hover:border-brand-500 hover:-translate-y-2 hover:shadow-xl transition-all duration-300" data-category="decor"><i class="fas fa-rug text-2xl text-brand-600 dark:text-brand-400 mb-1.5 block"></i><h4 class="font-semibold text-sm">Decor</h4><span class="cat-count block text-xs text-slate-400 mt-0.5 font-medium"></span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="py-14 md:py-20">
-        <div class="max-w-7xl mx-auto px-5 grid md:grid-cols-2 gap-8 items-center">
-            <div>
-                <h2 class="text-2xl md:text-3xl font-bold mb-6">Our Story</h2>
-                <p class="text-slate-500 dark:text-slate-400 mb-4">Founded in 2010, FurniCraft combines Scandinavian simplicity with artisanal craftsmanship.</p>
-                <p class="text-slate-500 dark:text-slate-400 mb-5">We believe furniture should be both beautiful and functional.</p>
-                <a href="#products" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-4 py-2 rounded-full transition"><i class="fas fa-arrow-right"></i> Explore Collection</a>
-            </div>
-            <img src="https://images.unsplash.com/photo-1605773527852-c546a8584ea3?auto=format&fit=crop&w=600&q=80" alt="Craftsmanship" class="rounded-2xl shadow-lg w-full h-72 object-cover">
-        </div>
-    </section>
-</main>
-
-<!-- Category Page -->
-<div id="categoryPage" class="hidden py-10 pb-16 min-h-[60vh]">
-    <div class="max-w-7xl mx-auto px-5">
-        <button id="backFromCategory" class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 font-medium mb-4 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700 hover:text-brand-600 hover:border-brand-500 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition text-sm">
-            <i class="fas fa-arrow-left"></i> Back
-        </button>
-        <h2 id="categoryPageTitle" class="text-2xl md:text-3xl font-bold mb-1">Living <span class="text-brand-600 dark:text-brand-400">Collection</span></h2>
-        <div id="categoryPageMeta" class="text-slate-400 mb-6 text-sm"></div>
-
-        <div class="flex gap-3 items-center mb-6 flex-wrap">
-            <label class="text-sm text-slate-400 font-semibold">Sort by:</label>
-            <select id="categorySort" class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold cursor-pointer outline-none focus:border-brand-500 transition">
-                <option value="default">Default</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-                <option value="name">Name (A–Z)</option>
-            </select>
-            <span id="categoryCount" class="text-xs text-slate-400"></span>
-        </div>
-
-        <div id="categoryProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
-    </div>
-</div>
-
-<!-- Dashboard -->
-<div id="dashboardWrapper" class="hidden min-h-[calc(100vh-4rem)]">
-    <div class="flex min-h-[calc(100vh-4rem)]">
-        <div id="sidebarOverlay" style="display:none;" class="fixed inset-0 bg-black/40 z-40 lg:hidden"></div>
-        <aside id="dashboardSidebar" class="w-64 shrink-0 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 p-5 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto transition-all fixed lg:static -translate-x-full lg:translate-x-0 z-50">
-            <div class="text-center p-4 rounded-2xl bg-gradient-to-br from-brand-50 dark:from-brand-900/30 to-transparent mb-5">
-                <div id="dashAvatar" class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white font-bold text-2xl flex items-center justify-center mx-auto mb-3"><i class="fas fa-user"></i></div>
-                <div id="sidebarUserName" class="font-bold text-sm">Guest</div>
-                <div id="sidebarUserEmail" class="text-xs text-slate-400">guest@example.com</div>
-            </div>
-            <nav class="flex flex-col gap-1">
-                <div class="dash-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-slate-500 dark:text-slate-400 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 hover:translate-x-1 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-brand-500 data-[active=true]:text-white" data-page="overview" data-active="true"><i class="fas fa-th-large"></i> Overview</div>
-                <div class="dash-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-slate-500 dark:text-slate-400 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 hover:translate-x-1 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-brand-500 data-[active=true]:text-white" data-page="orders"><i class="fas fa-history"></i> Orders</div>
-                <div class="dash-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-slate-500 dark:text-slate-400 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 hover:translate-x-1 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-brand-500 data-[active=true]:text-white" data-page="profile"><i class="fas fa-user-edit"></i> Profile</div>
-                <div class="dash-nav-item flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-slate-500 dark:text-slate-400 hover:bg-brand-50 dark:hover:bg-brand-900/30 hover:text-brand-600 hover:translate-x-1 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-brand-500 data-[active=true]:text-white" data-page="wishlist"><i class="fas fa-heart"></i> Wishlist</div>
-                <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
-                    <div id="logoutSidebarBtn" class="flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:translate-x-1"><i class="fas fa-sign-out-alt"></i> Sign Out</div>
-                </div>
-            </nav>
-        </aside>
-        <div class="flex-1 p-5 md:p-8 overflow-x-hidden min-w-0">
-            <div class="gradient-hero text-white p-6 md:p-10 rounded-3xl mb-6">
-                <div class="flex justify-between items-center flex-wrap gap-6">
-                    <div>
-                        <h1 class="text-2xl md:text-3xl font-extrabold mb-1 flex items-center gap-2 flex-wrap">Hey, <span id="dashGreeting">User</span> <span class="inline-block animate-wave">👋</span></h1>
-                        <p class="opacity-90 text-sm">Here's what's happening with your account today.</p>
-                    </div>
-                    <div class="flex gap-6 flex-wrap">
-                        <div class="text-center"><div class="text-2xl font-extrabold" id="dashStatOrders">0</div><div class="text-xs opacity-85">Orders</div></div>
-                        <div class="text-center"><div class="text-2xl font-extrabold" id="dashStatPoints">0</div><div class="text-xs opacity-85">Points</div></div>
-                        <div class="text-center"><div class="text-2xl font-extrabold" id="dashStatWishlist">0</div><div class="text-xs opacity-85">Wishlist</div></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-7 mb-6">
+                <div>
+                    <h4 class="text-white font-bold mb-3 text-sm"><i class="fas fa-couch"></i> FurniCraft</h4>
+                    <p class="opacity-80 text-sm mb-2">Modern furniture with soul.</p>
+                    <div class="flex gap-2 mt-2">
+                        <a href="#"
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-600 transition"><i
+                                class="fab fa-instagram text-sm"></i></a>
+                        <a href="#"
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-600 transition"><i
+                                class="fab fa-twitter text-sm"></i></a>
                     </div>
                 </div>
-            </div>
-
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center mb-3 text-lg"><i class="fas fa-shopping-bag"></i></div>
-                    <div class="text-2xl font-extrabold" id="statOrders">0</div>
-                    <div class="text-xs text-slate-400 uppercase">Total Orders</div>
+                <div>
+                    <h4 class="text-white font-bold mb-3 text-sm">Explore</h4>
+                    <a href="#products"
+                        class="block opacity-80 text-sm mb-1.5 hover:opacity-100 hover:text-white transition">Products</a>
+                    <a href="#categories"
+                        class="block opacity-80 text-sm mb-1.5 hover:opacity-100 hover:text-white transition">Categories</a>
                 </div>
-                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-green-500 to-green-600 text-white flex items-center justify-center mb-3 text-lg"><i class="fas fa-dollar-sign"></i></div>
-                    <div class="text-2xl font-extrabold" id="statSpent">$0</div>
-                    <div class="text-xs text-slate-400 uppercase">Total Spent</div>
+                <div>
+                    <h4 class="text-white font-bold mb-3 text-sm">Support</h4>
+                    <a href="#"
+                        class="block opacity-80 text-sm mb-1.5 hover:opacity-100 hover:text-white transition">Shipping</a>
+                    <a href="#"
+                        class="block opacity-80 text-sm mb-1.5 hover:opacity-100 hover:text-white transition">Returns</a>
                 </div>
-                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 text-white flex items-center justify-center mb-3 text-lg"><i class="fas fa-coins"></i></div>
-                    <div class="text-2xl font-extrabold" id="statPoints">0</div>
-                    <div class="text-xs text-slate-400 uppercase">Reward Points</div>
-                </div>
-                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center mb-3 text-lg"><i class="fas fa-heart"></i></div>
-                    <div class="text-2xl font-extrabold" id="statWishlist">0</div>
-                    <div class="text-xs text-slate-400 uppercase">Wishlist</div>
+                <div>
+                    <h4 class="text-white font-bold mb-3 text-sm">Contact</h4>
+                    <p class="opacity-80 text-sm mb-1.5">(123) 456-7890</p>
+                    <p class="opacity-80 text-sm mb-1.5">hello@furnicraft.com</p>
                 </div>
             </div>
-
-            <div id="dashboardPages"></div>
+            <div class="border-t border-white/10 pt-4 text-center text-xs opacity-70">&copy; 2025 FurniCraft. All rights
+                reserved.</div>
         </div>
-    </div>
-</div>
+    </footer>
 
-<!-- Admin Modal -->
-<div id="adminModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] hidden items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-slate-100 dark:bg-slate-900 rounded-3xl w-full max-w-6xl shadow-2xl overflow-hidden">
-        <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 flex justify-between items-center flex-wrap gap-3">
-            <h2 class="text-xl font-bold flex items-center gap-3"><i class="fas fa-crown text-amber-400"></i> Admin Control Panel <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-white text-[0.65rem] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Administrator</span></h2>
-            <button id="adminClose" class="w-9 h-9 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-red-500 transition"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="grid lg:grid-cols-[220px_1fr] min-h-[500px]">
-            <div class="bg-slate-900 text-slate-400 p-4 flex lg:flex-col gap-1 overflow-x-auto">
-                <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-accent-500 data-[active=true]:text-white" data-panel="dashboard" data-active="true"><i class="fas fa-chart-line w-4 text-center"></i> <span class="hidden lg:inline">Dashboard</span></div>
-                <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0" data-panel="products"><i class="fas fa-box w-4 text-center"></i> <span class="hidden lg:inline">Products</span><span class="ml-auto bg-white/15 px-2 py-0.5 rounded-full text-[0.65rem] font-bold" id="adminProductCount">0</span></div>
-                <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0" data-panel="orders"><i class="fas fa-shopping-bag w-4 text-center"></i> <span class="hidden lg:inline">Orders</span><span class="ml-auto bg-white/15 px-2 py-0.5 rounded-full text-[0.65rem] font-bold" id="adminOrderCount">0</span></div>
-                <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0" data-panel="users"><i class="fas fa-users w-4 text-center"></i> <span class="hidden lg:inline">Users</span><span class="ml-auto bg-white/15 px-2 py-0.5 rounded-full text-[0.65rem] font-bold" id="adminUserCount">0</span></div>
-            </div>
-            <div id="adminContent" class="p-5 bg-slate-100 dark:bg-slate-900"></div>
-        </div>
-    </div>
-</div>
-
-<!-- Product Form Modal -->
-<div id="productFormModal" class="fixed inset-0 bg-black/70 z-[110] hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-800 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden">
-        <div class="bg-gradient-to-r from-brand-600 to-brand-500 text-white p-5">
-            <h3 id="productFormTitle" class="font-bold"><i class="fas fa-plus-circle"></i> Add Product</h3>
-        </div>
-        <form id="productForm">
-            <div class="p-6 space-y-4">
-                <input type="hidden" id="productFormId">
-                <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Name</label><input type="text" id="productFormName" required class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition"></div>
-                <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Description</label><textarea id="productFormDesc" rows="2" class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition"></textarea></div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Price</label><input type="number" id="productFormPrice" step="0.01" required class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition"></div>
-                    <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Old Price</label><input type="number" id="productFormOldPrice" step="0.01" class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition"></div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Stock</label><input type="number" id="productFormStock" required class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition"></div>
-                    <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Category</label>
-                        <select id="productFormCategory" required class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition">
-                            <option value="living">Living</option><option value="bedroom">Bedroom</option><option value="dining">Dining</option><option value="office">Office</option><option value="lighting">Lighting</option><option value="decor">Decor</option>
-                        </select>
-                    </div>
-                </div>
-                <div><label class="block text-sm font-medium mb-1 text-slate-600 dark:text-slate-300">Image URL</label><input type="url" id="productFormImage" required class="w-full px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none focus:border-brand-500 transition"></div>
-            </div>
-            <div class="flex gap-3 justify-end p-5 border-t border-slate-200 dark:border-slate-700">
-                <button type="button" id="productFormCancel" class="px-5 py-2.5 rounded-full border-2 border-brand-600 text-brand-600 dark:border-brand-400 dark:text-brand-400 font-semibold text-sm hover:bg-brand-600 hover:text-white transition">Cancel</button>
-                <button type="submit" class="px-5 py-2.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm flex items-center gap-2 transition"><i class="fas fa-save"></i> Save</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Newsletter + Footer -->
-<section class="gradient-brand text-white py-9">
-    <div class="max-w-7xl mx-auto px-5 flex justify-between items-center flex-wrap gap-5">
-        <h2 class="text-xl font-bold"><i class="fas fa-envelope"></i> Subscribe</h2>
-        <form id="newsletterForm" class="flex gap-2 flex-wrap">
-            <input type="email" placeholder="Enter your email" required class="px-4 py-2.5 rounded-full border-none min-w-[220px] text-sm outline-none text-slate-800">
-            <button type="submit" class="bg-white text-brand-600 font-semibold px-5 py-2.5 rounded-full hover:-translate-y-0.5 hover:shadow-lg transition">Subscribe</button>
-        </form>
-    </div>
-</section>
-
-<footer class="bg-slate-900 text-slate-300 py-9 pb-5">
-    <div class="max-w-7xl mx-auto px-5">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-7 mb-6">
-            <div>
-                <h4 class="text-white font-bold mb-3 text-sm"><i class="fas fa-couch"></i> FurniCraft</h4>
-                <p class="opacity-80 text-sm mb-2">Modern furniture with soul.</p>
-                <div class="flex gap-2 mt-2">
-                    <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-600 transition"><i class="fab fa-instagram text-sm"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-600 transition"><i class="fab fa-twitter text-sm"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-3 text-sm">Explore</h4>
-                <a href="#products" class="block opacity-80 text-sm mb-1.5 hover:opacity-100 hover:text-white transition">Products</a>
-                <a href="#categories" class="block opacity-80 text-sm mb-1.5 hover:opacity-100 hover:text-white transition">Categories</a>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-3 text-sm">Support</h4>
-                <a href="#" class="block opacity-80 text-sm mb-1.5 hover:opacity-100 hover:text-white transition">Shipping</a>
-                <a href="#" class="block opacity-80 text-sm mb-1.5 hover:opacity-100 hover:text-white transition">Returns</a>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-3 text-sm">Contact</h4>
-                <p class="opacity-80 text-sm mb-1.5">(123) 456-7890</p>
-                <p class="opacity-80 text-sm mb-1.5">hello@furnicraft.com</p>
-            </div>
-        </div>
-        <div class="border-t border-white/10 pt-4 text-center text-xs opacity-70">&copy; 2025 FurniCraft. All rights reserved.</div>
-    </div>
-</footer>
-
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
