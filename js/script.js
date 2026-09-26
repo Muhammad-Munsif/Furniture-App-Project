@@ -11,10 +11,10 @@ const Storage = (() => {
     };
     function safeGet(key, fallback = null) {
         try { const raw = localStorage.getItem(key); if (raw === null) return fallback; return JSON.parse(raw); }
-        catch (err) { try { localStorage.removeItem(key); } catch (_) {} return fallback; }
+        catch (err) { try { localStorage.removeItem(key); } catch (_) { } return fallback; }
     }
     function safeSet(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (err) { return false; } }
-    function safeRemove(key) { try { localStorage.removeItem(key); } catch (_) {} }
+    function safeRemove(key) { try { localStorage.removeItem(key); } catch (_) { } }
     return {
         KEYS, safeGet, safeSet, safeRemove,
         getUsers: () => { const u = safeGet(KEYS.USERS, []); return Array.isArray(u) ? u : []; },
@@ -96,7 +96,7 @@ const Auth = (() => {
     const S = Storage, C = CryptoUtil;
     let currentUser = null;
     const listeners = new Set();
-    function notify() { listeners.forEach(fn => { try { fn(currentUser); } catch (e) {} }); }
+    function notify() { listeners.forEach(fn => { try { fn(currentUser); } catch (e) { } }); }
     function subscribe(fn) { listeners.add(fn); fn(currentUser); return () => listeners.delete(fn); }
     function loadSession() {
         const session = S.getSession(); if (!session) return null;
@@ -645,7 +645,7 @@ const App = (() => {
                     <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5">
                         <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200 dark:border-slate-700"><h3 class="font-bold text-sm flex items-center gap-2"><i class="fas fa-chart-line"></i> Spending Overview</h3></div>
                         <div class="flex items-end gap-1.5 h-24">
-                            ${[40,65,50,80,60,90,75].map(v => `<div class="flex-1 rounded-t-md bg-gradient-to-t from-brand-600 to-brand-400" style="height:${v}%"></div>`).join('')}
+                            ${[40, 65, 50, 80, 60, 90, 75].map(v => `<div class="flex-1 rounded-t-md bg-gradient-to-t from-brand-600 to-brand-400" style="height:${v}%"></div>`).join('')}
                         </div>
                     </div>
                     <div class="gradient-hero text-white rounded-2xl p-5 relative overflow-hidden">
@@ -720,7 +720,7 @@ const App = (() => {
                     </form>
                 </div>
             `;
-            $('#profileForm').addEventListener('submit', function(e) {
+            $('#profileForm').addEventListener('submit', function (e) {
                 e.preventDefault();
                 const newName = $('#pName').value.trim();
                 const newEmail = $('#pEmail').value.trim();
@@ -842,7 +842,7 @@ const App = (() => {
             `;
             renderAdminProducts(PRODUCTS);
             $('#addProductBtn')?.addEventListener('click', () => openProductForm());
-            $('#adminProductSearch')?.addEventListener('input', function() {
+            $('#adminProductSearch')?.addEventListener('input', function () {
                 const q = this.value.toLowerCase();
                 renderAdminProducts(PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)));
             });
@@ -867,7 +867,7 @@ const App = (() => {
                 </div>
             `;
             content.querySelectorAll('.status-select').forEach(sel => {
-                sel.addEventListener('change', function() {
+                sel.addEventListener('change', function () {
                     const oid = this.dataset.orderId; const email = this.dataset.userEmail; const st = this.value;
                     const orders = Storage.safeGet(Storage.KEYS.ORDERS(email), []);
                     const idx = orders.findIndex(o => o.id === oid);
@@ -890,9 +890,9 @@ const App = (() => {
                             <tr><th class="px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Name</th><th class="px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Email</th><th class="px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Phone</th><th class="px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Role</th><th class="px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Orders</th><th class="px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Joined</th></tr>
                         </thead>
                         <tbody>${users.map(u => {
-                            const orders = Storage.safeGet(Storage.KEYS.ORDERS(u.email), []);
-                            return `<tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-900/10"><td class="px-4 py-3">${escapeHtml(u.name)}</td><td class="px-4 py-3">${escapeHtml(u.email)}</td><td class="px-4 py-3">${escapeHtml(u.phone || '—')}</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded-full text-[0.68rem] font-bold uppercase ${u.role === 'admin' ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-white' : 'bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-300'}">${u.role || 'customer'}</span></td><td class="px-4 py-3">${orders.length}</td><td class="px-4 py-3">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : '—'}</td></tr>`;
-                        }).join('')}</tbody>
+                const orders = Storage.safeGet(Storage.KEYS.ORDERS(u.email), []);
+                return `<tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-900/10"><td class="px-4 py-3">${escapeHtml(u.name)}</td><td class="px-4 py-3">${escapeHtml(u.email)}</td><td class="px-4 py-3">${escapeHtml(u.phone || '—')}</td><td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded-full text-[0.68rem] font-bold uppercase ${u.role === 'admin' ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-white' : 'bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-300'}">${u.role || 'customer'}</span></td><td class="px-4 py-3">${orders.length}</td><td class="px-4 py-3">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : '—'}</td></tr>`;
+            }).join('')}</tbody>
                     </table>
                 </div>
             `;
@@ -913,8 +913,8 @@ const App = (() => {
                 </div></td>
             </tr>
         `).join('') || '<tr><td colspan="6" class="text-center py-8 text-slate-400">No products</td></tr>';
-        tbody.querySelectorAll('.admin-btn-icon.edit').forEach(b => b.addEventListener('click', function() { openProductForm(parseInt(this.dataset.id)); }));
-        tbody.querySelectorAll('.admin-btn-icon.delete').forEach(b => b.addEventListener('click', function() {
+        tbody.querySelectorAll('.admin-btn-icon.edit').forEach(b => b.addEventListener('click', function () { openProductForm(parseInt(this.dataset.id)); }));
+        tbody.querySelectorAll('.admin-btn-icon.delete').forEach(b => b.addEventListener('click', function () {
             const id = parseInt(this.dataset.id);
             if (confirm('Delete this product?')) {
                 PRODUCTS = PRODUCTS.filter(p => p.id !== id);
@@ -991,7 +991,7 @@ const App = (() => {
                 </div>
             `).join('');
             box.querySelectorAll('.suggestion-item').forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     const id = parseInt(this.dataset.id);
                     const prod = PRODUCTS.find(p => p.id === id);
                     if (prod) showCategory(prod.category);
@@ -1020,25 +1020,25 @@ const App = (() => {
         }, 1000);
 
         // Categories
-        $$('.category-card').forEach(c => c.addEventListener('click', function() { showCategory(this.dataset.category); }));
+        $$('.category-card').forEach(c => c.addEventListener('click', function () { showCategory(this.dataset.category); }));
         $('#backFromCategory')?.addEventListener('click', hideCategoryPage);
 
         // Category sort
-        $('#categorySort')?.addEventListener('change', function() {
+        $('#categorySort')?.addEventListener('change', function () {
             currentSort = this.value;
             if (currentCategory) renderCategoryGrid(getSortedCategoryItems(currentCategory, currentSort));
         });
 
         // Home
-        $('#homeLink')?.addEventListener('click', function() {
+        $('#homeLink')?.addEventListener('click', function () {
             if (!$('#categoryPage').classList.contains('hidden')) hideCategoryPage();
             if (!$('#dashboardWrapper').classList.contains('hidden')) hideDashboard();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         // Search
-        $('#searchInput')?.addEventListener('input', function() { handleSearch(this.value); });
-        $('#searchToggle')?.addEventListener('click', function(e) {
+        $('#searchInput')?.addEventListener('input', function () { handleSearch(this.value); });
+        $('#searchToggle')?.addEventListener('click', function (e) {
             e.stopPropagation();
             const w = $('#searchWrapper');
             if (!w) return;
@@ -1064,7 +1064,7 @@ const App = (() => {
         $('#checkoutBtn')?.addEventListener('click', checkout);
 
         // Global event delegation for product & cart buttons
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             const addBtn = e.target.closest('.add-cart');
             if (addBtn) { e.preventDefault(); e.stopPropagation(); if (!addBtn.disabled) addToCart(parseInt(addBtn.dataset.id)); return; }
             const wishBtn = e.target.closest('.wishlist-btn');
@@ -1095,7 +1095,7 @@ const App = (() => {
         $('#compareOpen')?.addEventListener('click', () => showToast('Compare coming soon', 'info'));
 
         // Theme toggle
-        $('#themeToggle')?.addEventListener('click', function(e) {
+        $('#themeToggle')?.addEventListener('click', function (e) {
             e.preventDefault(); e.stopPropagation();
             const isDark = document.documentElement.classList.contains('dark');
             if (isDark) { document.documentElement.classList.remove('dark'); theme = 'light'; }
@@ -1104,7 +1104,7 @@ const App = (() => {
         });
 
         // Dashboard nav items
-        $$('.dash-nav-item[data-page]').forEach(i => i.addEventListener('click', function() {
+        $$('.dash-nav-item[data-page]').forEach(i => i.addEventListener('click', function () {
             $$('.dash-nav-item').forEach(x => x.dataset.active = 'false');
             this.dataset.active = 'true';
             renderDashboardPage(this.dataset.page);
@@ -1112,7 +1112,7 @@ const App = (() => {
         $('#logoutSidebarBtn')?.addEventListener('click', () => { Auth.logoutUser(); hideDashboard(); showToast('Signed out successfully', 'info'); });
 
         // Mobile dashboard sidebar toggle
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (e.target.closest('[data-toggle-dash-sidebar]')) {
                 const sidebar = $('#dashboardSidebar'); const overlay = $('#sidebarOverlay');
                 if (sidebar && overlay) {
@@ -1122,7 +1122,7 @@ const App = (() => {
                 }
             }
         });
-        $('#sidebarOverlay')?.addEventListener('click', function() {
+        $('#sidebarOverlay')?.addEventListener('click', function () {
             $('#dashboardSidebar')?.classList.add('-translate-x-full');
             $('#dashboardSidebar')?.classList.remove('translate-x-0');
             this.style.display = 'none';
@@ -1130,14 +1130,14 @@ const App = (() => {
 
         // Admin
         $('#adminClose')?.addEventListener('click', closeAdmin);
-        $('#adminModal')?.addEventListener('click', function(e) { if (e.target === this) closeAdmin(); });
-        $$('.admin-nav-item[data-panel]').forEach(i => i.addEventListener('click', function() { renderAdminPanel(this.dataset.panel); }));
+        $('#adminModal')?.addEventListener('click', function (e) { if (e.target === this) closeAdmin(); });
+        $$('.admin-nav-item[data-panel]').forEach(i => i.addEventListener('click', function () { renderAdminPanel(this.dataset.panel); }));
         $('#productForm')?.addEventListener('submit', saveProduct);
         $('#productFormCancel')?.addEventListener('click', closeProductForm);
-        $('#productFormModal')?.addEventListener('click', function(e) { if (e.target === this) closeProductForm(); });
+        $('#productFormModal')?.addEventListener('click', function (e) { if (e.target === this) closeProductForm(); });
 
         // Mobile
-        $('#hamburgerBtn')?.addEventListener('click', function() {
+        $('#hamburgerBtn')?.addEventListener('click', function () {
             const m = $('#mobileMenu');
             m.classList.toggle('hidden');
             m.classList.toggle('flex');
@@ -1188,14 +1188,14 @@ const App = (() => {
         $('#ddLogout')?.addEventListener('click', () => { Auth.logoutUser(); hideDashboard(); showToast('Signed out successfully', 'info'); });
 
         // Nav links
-        $('#dashboardNav')?.addEventListener('click', function(e) { e.preventDefault(); if (Guards.requireAuth()) showDashboard(); });
-        $('#adminNav')?.addEventListener('click', function(e) { e.preventDefault(); if (Guards.requireRole('admin')) openAdmin(); });
-        $('#mobileDashboardNav')?.addEventListener('click', function(e) { e.preventDefault(); if (Guards.requireAuth()) showDashboard(); $('#mobileMenu').classList.add('hidden'); });
-        $('#mobileAdminNav')?.addEventListener('click', function(e) { e.preventDefault(); if (Guards.requireRole('admin')) openAdmin(); $('#mobileMenu').classList.add('hidden'); });
+        $('#dashboardNav')?.addEventListener('click', function (e) { e.preventDefault(); if (Guards.requireAuth()) showDashboard(); });
+        $('#adminNav')?.addEventListener('click', function (e) { e.preventDefault(); if (Guards.requireRole('admin')) openAdmin(); });
+        $('#mobileDashboardNav')?.addEventListener('click', function (e) { e.preventDefault(); if (Guards.requireAuth()) showDashboard(); $('#mobileMenu').classList.add('hidden'); });
+        $('#mobileAdminNav')?.addEventListener('click', function (e) { e.preventDefault(); if (Guards.requireRole('admin')) openAdmin(); $('#mobileMenu').classList.add('hidden'); });
 
-        $('#newsletterForm')?.addEventListener('submit', function(e) { e.preventDefault(); showToast('Subscribed!', 'success'); this.reset(); });
+        $('#newsletterForm')?.addEventListener('submit', function (e) { e.preventDefault(); showToast('Subscribed!', 'success'); this.reset(); });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 if (!$('#cartSidebar').classList.contains('translate-x-full')) { $('#cartSidebar').classList.add('translate-x-full'); $('#cartOverlay').classList.add('hidden'); }
                 if (!$('#adminModal').classList.contains('hidden')) closeAdmin();
@@ -1204,7 +1204,7 @@ const App = (() => {
             }
         });
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const h = $('#mainHeader');
             if (window.pageYOffset > 20) h?.classList.add('shadow-lg');
             else h?.classList.remove('shadow-lg');
