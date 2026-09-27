@@ -1,4 +1,4 @@
- <script>
+
         /* ============================================================
            MODULE 1: STORAGE
            ============================================================ */
@@ -1455,4 +1455,4 @@
         }
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootstrap);
         else bootstrap();
-    </script>
+    
