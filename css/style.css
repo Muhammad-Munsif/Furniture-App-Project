@@ -1,4 +1,4 @@
- <style>
+ 
         .gradient-brand {
             background: linear-gradient(-45deg, #2b6cb0, #1a365d, #2b6cb0, #7c3aed);
             background-size: 400% 400%;
@@ -69,4 +69,4 @@
         .snap-gallery>* {
             scroll-snap-align: center;
         }
-    </style>
+    
