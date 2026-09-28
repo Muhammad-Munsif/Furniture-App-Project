@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
-        <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -56,7 +56,7 @@
             }
         }
     </script>
-    
+
 </head>
 
 <body
@@ -218,7 +218,8 @@
                                 class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
                             <div id="ddAdminPanel" style="display:none;"
                                 class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-bold text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:translate-x-1 cursor-pointer transition">
-                                <i class="fas fa-crown w-4 text-center"></i> Admin Panel</div>
+                                <i class="fas fa-crown w-4 text-center"></i> Admin Panel
+                            </div>
                             <div class="h-px bg-slate-200 dark:bg-slate-700 my-1"></div>
                             <div class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:translate-x-1 cursor-pointer transition"
                                 id="ddLogout"><i class="fas fa-sign-out-alt w-4 text-center"></i> Logout</div>
@@ -672,7 +673,8 @@
                     class="text-center p-4 rounded-2xl bg-gradient-to-br from-brand-50 dark:from-brand-900/30 to-transparent mb-5">
                     <div id="dashAvatar"
                         class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white font-bold text-2xl flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-user"></i></div>
+                        <i class="fas fa-user"></i>
+                    </div>
                     <div id="sidebarUserName" class="font-bold text-sm">Guest</div>
                     <div id="sidebarUserEmail" class="text-xs text-slate-400">guest@example.com</div>
                 </div>
@@ -688,7 +690,8 @@
                     <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
                         <div id="logoutSidebarBtn"
                             class="flex items-center gap-3 px-4 py-2.5 rounded-xl font-medium text-sm cursor-pointer transition text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:translate-x-1">
-                            <i class="fas fa-sign-out-alt"></i> Sign Out</div>
+                            <i class="fas fa-sign-out-alt"></i> Sign Out
+                        </div>
                     </div>
                 </nav>
             </aside>
@@ -723,7 +726,8 @@
                         class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
                         <div
                             class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center mb-3 text-lg">
-                            <i class="fas fa-shopping-bag"></i></div>
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
                         <div class="text-2xl font-extrabold" id="statOrders">0</div>
                         <div class="text-xs text-slate-400 uppercase">Total Orders</div>
                     </div>
@@ -731,7 +735,8 @@
                         class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
                         <div
                             class="w-11 h-11 rounded-xl bg-gradient-to-br from-green-500 to-green-600 text-white flex items-center justify-center mb-3 text-lg">
-                            <i class="fas fa-dollar-sign"></i></div>
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
                         <div class="text-2xl font-extrabold" id="statSpent">$0</div>
                         <div class="text-xs text-slate-400 uppercase">Total Spent</div>
                     </div>
@@ -739,7 +744,8 @@
                         class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
                         <div
                             class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 text-white flex items-center justify-center mb-3 text-lg">
-                            <i class="fas fa-coins"></i></div>
+                            <i class="fas fa-coins"></i>
+                        </div>
                         <div class="text-2xl font-extrabold" id="statPoints">0</div>
                         <div class="text-xs text-slate-400 uppercase">Reward Points</div>
                     </div>
@@ -747,7 +753,8 @@
                         class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 hover:-translate-y-2 hover:shadow-xl transition-all">
                         <div
                             class="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center mb-3 text-lg">
-                            <i class="fas fa-heart"></i></div>
+                            <i class="fas fa-heart"></i>
+                        </div>
                         <div class="text-2xl font-extrabold" id="statWishlist">0</div>
                         <div class="text-xs text-slate-400 uppercase">Wishlist</div>
                     </div>
@@ -778,7 +785,8 @@
                 <div class="bg-slate-900 text-slate-400 p-4 flex lg:flex-col gap-1 overflow-x-auto">
                     <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0 data-[active=true]:bg-gradient-to-r data-[active=true]:from-brand-600 data-[active=true]:to-accent-500 data-[active=true]:text-white"
                         data-panel="dashboard" data-active="true"><i class="fas fa-chart-line w-4 text-center"></i>
-                        <span class="hidden lg:inline">Dashboard</span></div>
+                        <span class="hidden lg:inline">Dashboard</span>
+                    </div>
                     <div class="admin-nav-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-sm cursor-pointer transition text-slate-400 hover:bg-brand-500/10 hover:text-brand-300 shrink-0"
                         data-panel="products"><i class="fas fa-box w-4 text-center"></i> <span
                             class="hidden lg:inline">Products</span><span
@@ -1002,7 +1010,7 @@
         </div>
     </footer>
 
-   <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
