@@ -1,3 +1,4 @@
+
 /* ============================================================
    MODULE 1: STORAGE
    ============================================================ */
@@ -10,10 +11,10 @@ const Storage = (() => {
     };
     function safeGet(key, fallback = null) {
         try { const raw = localStorage.getItem(key); if (raw === null) return fallback; return JSON.parse(raw); }
-        catch (err) { try { localStorage.removeItem(key); } catch (_) { } return fallback; }
+        catch (err) { try { localStorage.removeItem(key); } catch (_) {} return fallback; }
     }
     function safeSet(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (err) { return false; } }
-    function safeRemove(key) { try { localStorage.removeItem(key); } catch (_) { } }
+    function safeRemove(key) { try { localStorage.removeItem(key); } catch (_) {} }
     return {
         KEYS, safeGet, safeSet, safeRemove,
         getUsers: () => { const u = safeGet(KEYS.USERS, []); return Array.isArray(u) ? u : []; },
@@ -95,7 +96,7 @@ const Auth = (() => {
     const S = Storage, C = CryptoUtil;
     let currentUser = null;
     const listeners = new Set();
-    function notify() { listeners.forEach(fn => { try { fn(currentUser); } catch (e) { } }); }
+    function notify() { listeners.forEach(fn => { try { fn(currentUser); } catch (e) {} }); }
     function subscribe(fn) { listeners.add(fn); fn(currentUser); return () => listeners.delete(fn); }
     function loadSession() {
         const session = S.getSession(); if (!session) return null;
@@ -301,10 +302,10 @@ const AuthUI = (() => {
 const App = (() => {
     const DEFAULT_PRODUCTS = [
         // LIVING (10)
-        { id: 101, name: 'Luxury Velvet Sofa', price: 899.99, oldPrice: 1299.99, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80', images: ['https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80'], desc: 'Elegant velvet with premium cushioning.', rating: 4.8, reviewCount: 124, isNew: true, stock: 15, category: 'living' },
-        { id: 102, name: 'Modern Armchair', price: 349.99, oldPrice: 449.99, image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80', images: ['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&q=80'], desc: 'Ergonomic design with stylish fabric.', rating: 4.6, reviewCount: 89, stock: 3, category: 'living' },
-        { id: 103, name: 'Sectional Sofa L-Shape', price: 1299.99, oldPrice: 1699.99, image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80', images: ['https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80'], desc: 'Spacious L-shaped sectional.', rating: 4.8, reviewCount: 45, stock: 5, category: 'living' },
-        { id: 104, name: 'Coffee Table Glass', price: 299.99, oldPrice: 399.99, image: 'https://images.unsplash.com/photo-1532372576444-dda954194ad6?auto=format&fit=crop&w=800&q=80', images: ['https://images.unsplash.com/photo-1532372576444-dda954194ad6?auto=format&fit=crop&w=800&q=80', 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80'], desc: 'Minimalist wood and tempered glass.', rating: 4.5, reviewCount: 32, stock: 12, category: 'living' },
+        { id: 101, name: 'Luxury Velvet Sofa', price: 899.99, oldPrice: 1299.99, image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80', images: ['https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80'], desc: 'Elegant velvet with premium cushioning.', rating: 4.8, reviewCount: 124, isNew: true, stock: 15, category: 'living' },
+        { id: 102, name: 'Modern Armchair', price: 349.99, oldPrice: 449.99, image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80', images: ['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&q=80'], desc: 'Ergonomic design with stylish fabric.', rating: 4.6, reviewCount: 89, stock: 3, category: 'living' },
+        { id: 103, name: 'Sectional Sofa L-Shape', price: 1299.99, oldPrice: 1699.99, image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80', images: ['https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=800&q=80'], desc: 'Spacious L-shaped sectional.', rating: 4.8, reviewCount: 45, stock: 5, category: 'living' },
+        { id: 104, name: 'Coffee Table Glass', price: 299.99, oldPrice: 399.99, image: 'https://images.unsplash.com/photo-1532372576444-dda954194ad6?auto=format&fit=crop&w=800&q=80', images: ['https://images.unsplash.com/photo-1532372576444-dda954194ad6?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80'], desc: 'Minimalist wood and tempered glass.', rating: 4.5, reviewCount: 32, stock: 12, category: 'living' },
         { id: 105, name: 'Recliner Lounge Chair', price: 549.99, image: 'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&q=80', desc: 'Push-back recliner with footrest.', rating: 4.7, reviewCount: 51, stock: 7, category: 'living' },
         { id: 106, name: 'TV Media Console', price: 429.99, oldPrice: 549.99, image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80', desc: 'Walnut finish with cable management.', rating: 4.6, reviewCount: 28, stock: 9, category: 'living' },
         { id: 107, name: 'Accent Side Table', price: 129.99, image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80', desc: 'Round marble-top side table.', rating: 4.4, reviewCount: 19, stock: 22, category: 'living' },
@@ -519,10 +520,10 @@ const App = (() => {
                     <div class="text-xs text-slate-400 mt-0.5">${total} review${total !== 1 ? 's' : ''}</div>
                 </div>
                 <div class="flex-1 min-w-[180px] flex flex-col gap-1">
-                    ${[5, 4, 3, 2, 1].map(star => {
-            const count = buckets[star] || 0;
-            const pct = total > 0 ? (count / total) * 100 : 0;
-            return `
+                    ${[5,4,3,2,1].map(star => {
+                        const count = buckets[star] || 0;
+                        const pct = total > 0 ? (count / total) * 100 : 0;
+                        return `
                         <div class="flex items-center gap-2 text-xs">
                             <span class="w-8 text-slate-500">${star}★</span>
                             <div class="flex-1 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
@@ -530,7 +531,7 @@ const App = (() => {
                             </div>
                             <span class="w-8 text-right text-slate-400">${count}</span>
                         </div>`;
-        }).join('')}
+                    }).join('')}
                 </div>
             </div>
         `;
@@ -542,7 +543,7 @@ const App = (() => {
                 <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
                     <div class="flex items-start gap-3">
                         <div class="w-9 h-9 rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
-                            ${r.userName.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()}
+                            ${r.userName.split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase()}
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2 flex-wrap">
@@ -580,13 +581,13 @@ const App = (() => {
     function renderReviewStarInput() {
         const container = $('#reviewStars');
         if (!container) return;
-        container.innerHTML = [1, 2, 3, 4, 5].map(n => `
+        container.innerHTML = [1,2,3,4,5].map(n => `
             <button class="review-star ${n <= reviewDraftRating ? 'text-amber-400' : 'text-slate-300 dark:text-slate-600'} hover:text-amber-400 transition" data-star="${n}" aria-label="${n} star">
                 <i class="fas fa-star"></i>
             </button>
         `).join('');
         container.querySelectorAll('.review-star').forEach(btn => {
-            btn.addEventListener('click', function () {
+            btn.addEventListener('click', function() {
                 reviewDraftRating = parseInt(this.dataset.star);
                 renderReviewStarInput();
             });
@@ -857,12 +858,12 @@ const App = (() => {
         const thumbs = $('#detailThumbs');
         if (!thumbs) return;
         thumbs.innerHTML = imgs.map((src, i) => `
-            <button class="thumb-btn shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden border-2 ${i === index ? 'border-white' : 'border-white/40 opacity-70'} transition hover:opacity-100" data-index="${i}" aria-label="View image ${i + 1}">
+            <button class="thumb-btn shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden border-2 ${i === index ? 'border-white' : 'border-white/40 opacity-70'} transition hover:opacity-100" data-index="${i}" aria-label="View image ${i+1}">
                 <img src="${src}" alt="" class="w-full h-full object-cover">
             </button>
         `).join('');
         thumbs.querySelectorAll('.thumb-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
+            btn.addEventListener('click', function() {
                 detailImageIndex = parseInt(this.dataset.index);
                 renderDetailGallery(imgs, detailImageIndex);
             });
@@ -889,7 +890,7 @@ const App = (() => {
             `;
         }).join('');
         container.querySelectorAll('.size-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
+            btn.addEventListener('click', function() {
                 detailSize = this.dataset.size;
                 const p = PRODUCTS.find(x => x.id === detailProductId);
                 $('#detailPrice').textContent = '$' + (p.price * SIZE_MULTIPLIERS[detailSize]).toFixed(2);
@@ -941,7 +942,7 @@ const App = (() => {
             </button>
         `).join('');
         container.querySelectorAll('.related-card').forEach(card => {
-            card.addEventListener('click', function () {
+            card.addEventListener('click', function() {
                 const id = parseInt(this.dataset.id);
                 closeProductDetail();
                 setTimeout(() => openProductDetail(id), 150);
@@ -976,8 +977,8 @@ const App = (() => {
         const progress = (currentIdx / (steps.length - 1)) * 100;
         const statusPillColor = order.status === 'delivered' ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300'
             : order.status === 'shipped' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300'
-                : order.status === 'pending' ? 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300'
-                    : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300';
+            : order.status === 'pending' ? 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300'
+            : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300';
         const estDate = new Date(new Date(order.date).getTime() + 5 * 86400000);
         const estStr = estDate.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
         return `
@@ -997,16 +998,16 @@ const App = (() => {
                 <div class="absolute top-4 left-0 h-1 bg-gradient-to-r from-brand-500 to-brand-400 rounded-full transition-all duration-700" style="width:${progress}%"></div>
                 <div class="relative flex justify-between">
                     ${steps.map((s, i) => {
-            const isDone = i <= currentIdx;
-            const isCurrent = i === currentIdx;
-            return `
+                        const isDone = i <= currentIdx;
+                        const isCurrent = i === currentIdx;
+                        return `
                         <div class="flex flex-col items-center flex-1">
                             <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 ${isDone ? 'bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg' : 'bg-slate-200 dark:bg-slate-700 text-slate-400'} ${isCurrent ? 'ring-4 ring-brand-500/30' : ''}">
                                 <i class="fas ${s.icon}"></i>
                             </div>
                             <div class="text-[0.6rem] sm:text-xs font-semibold mt-1.5 text-center ${isDone ? 'text-brand-600 dark:text-brand-400' : 'text-slate-400'}">${s.label}</div>
                         </div>`;
-        }).join('')}
+                    }).join('')}
                 </div>
             </div>
             <div class="flex items-center gap-2 text-xs sm:text-sm bg-brand-50 dark:bg-brand-900/20 border border-brand-200 dark:border-brand-800 rounded-xl p-3 mb-3">
@@ -1095,7 +1096,7 @@ const App = (() => {
                 <div class="grid lg:grid-cols-2 gap-5 mb-5">
                     <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5">
                         <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200 dark:border-slate-700"><h3 class="font-bold text-sm flex items-center gap-2"><i class="fas fa-chart-line"></i> Spending Overview</h3></div>
-                        <div class="flex items-end gap-1.5 h-24">${[40, 65, 50, 80, 60, 90, 75].map(v => `<div class="flex-1 rounded-t-md bg-gradient-to-t from-brand-600 to-brand-400" style="height:${v}%"></div>`).join('')}</div>
+                        <div class="flex items-end gap-1.5 h-24">${[40,65,50,80,60,90,75].map(v => `<div class="flex-1 rounded-t-md bg-gradient-to-t from-brand-600 to-brand-400" style="height:${v}%"></div>`).join('')}</div>
                     </div>
                     <div class="gradient-hero text-white rounded-2xl p-5 relative overflow-hidden">
                         <div class="inline-flex items-center gap-1.5 bg-white/20 px-3 py-1 rounded-full font-bold text-xs mb-3">${tierIcon} ${tier} Member</div>
@@ -1125,8 +1126,8 @@ const App = (() => {
                         <h3 class="font-bold text-sm flex items-center gap-2"><i class="fas fa-history"></i> All Orders (${orders.length})</h3>
                     </div>
                     ${orders.length === 0
-                    ? '<div class="text-center py-8 text-slate-400"><i class="fas fa-shopping-bag text-3xl mb-2 block opacity-30"></i><p>No orders yet</p></div>'
-                    : `<div class="flex flex-col gap-4">${orders.map(o => renderOrderTimeline(o)).join('')}</div>`}
+                        ? '<div class="text-center py-8 text-slate-400"><i class="fas fa-shopping-bag text-3xl mb-2 block opacity-30"></i><p>No orders yet</p></div>'
+                        : `<div class="flex flex-col gap-4">${orders.map(o => renderOrderTimeline(o)).join('')}</div>`}
                 </div>
             `;
         } else if (page === 'wishlist') {
@@ -1165,7 +1166,7 @@ const App = (() => {
                     </form>
                 </div>
             `;
-            $('#profileForm').addEventListener('submit', function (e) {
+            $('#profileForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 const newName = $('#pName').value.trim();
                 const newEmail = $('#pEmail').value.trim();
@@ -1282,7 +1283,7 @@ const App = (() => {
             `;
             renderAdminProducts(PRODUCTS);
             $('#addProductBtn')?.addEventListener('click', () => openProductForm());
-            $('#adminProductSearch')?.addEventListener('input', function () {
+            $('#adminProductSearch')?.addEventListener('input', function() {
                 const q = this.value.toLowerCase();
                 renderAdminProducts(PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)));
             });
@@ -1321,7 +1322,7 @@ const App = (() => {
                 </div>
             `;
             content.querySelectorAll('.status-select').forEach(sel => {
-                sel.addEventListener('change', function () {
+                sel.addEventListener('change', function() {
                     const oid = this.dataset.orderId; const email = this.dataset.userEmail; const st = this.value;
                     const orders = Storage.safeGet(Storage.KEYS.ORDERS(email), []);
                     const idx = orders.findIndex(o => o.id === oid);
@@ -1339,7 +1340,7 @@ const App = (() => {
                 });
             });
             content.querySelectorAll('.tracking-input').forEach(inp => {
-                inp.addEventListener('change', function () {
+                inp.addEventListener('change', function() {
                     const oid = this.dataset.orderId; const email = this.dataset.userEmail;
                     const orders = Storage.safeGet(Storage.KEYS.ORDERS(email), []);
                     const idx = orders.findIndex(o => o.id === oid);
@@ -1351,7 +1352,7 @@ const App = (() => {
                 });
             });
             content.querySelectorAll('.admin-note-input').forEach(inp => {
-                inp.addEventListener('blur', function () {
+                inp.addEventListener('blur', function() {
                     const oid = this.dataset.orderId; const email = this.dataset.userEmail;
                     const orders = Storage.safeGet(Storage.KEYS.ORDERS(email), []);
                     const idx = orders.findIndex(o => o.id === oid);
@@ -1374,9 +1375,9 @@ const App = (() => {
                             <tr><th class="px-3 sm:px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Name</th><th class="px-3 sm:px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Email</th><th class="px-3 sm:px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Phone</th><th class="px-3 sm:px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Role</th><th class="px-3 sm:px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Orders</th><th class="px-3 sm:px-4 py-3 text-left text-[0.7rem] font-bold uppercase text-slate-400">Joined</th></tr>
                         </thead>
                         <tbody>${users.map(u => {
-                const orders = Storage.safeGet(Storage.KEYS.ORDERS(u.email), []);
-                return `<tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-900/10"><td class="px-3 sm:px-4 py-3">${escapeHtml(u.name)}</td><td class="px-3 sm:px-4 py-3">${escapeHtml(u.email)}</td><td class="px-3 sm:px-4 py-3">${escapeHtml(u.phone || '—')}</td><td class="px-3 sm:px-4 py-3"><span class="inline-block px-2 py-0.5 rounded-full text-[0.68rem] font-bold uppercase ${u.role === 'admin' ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-white' : 'bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-300'}">${u.role || 'customer'}</span></td><td class="px-3 sm:px-4 py-3">${orders.length}</td><td class="px-3 sm:px-4 py-3">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : '—'}</td></tr>`;
-            }).join('')}</tbody>
+                            const orders = Storage.safeGet(Storage.KEYS.ORDERS(u.email), []);
+                            return `<tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-brand-50 dark:hover:bg-brand-900/10"><td class="px-3 sm:px-4 py-3">${escapeHtml(u.name)}</td><td class="px-3 sm:px-4 py-3">${escapeHtml(u.email)}</td><td class="px-3 sm:px-4 py-3">${escapeHtml(u.phone || '—')}</td><td class="px-3 sm:px-4 py-3"><span class="inline-block px-2 py-0.5 rounded-full text-[0.68rem] font-bold uppercase ${u.role === 'admin' ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-white' : 'bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-300'}">${u.role || 'customer'}</span></td><td class="px-3 sm:px-4 py-3">${orders.length}</td><td class="px-3 sm:px-4 py-3">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : '—'}</td></tr>`;
+                        }).join('')}</tbody>
                     </table>
                 </div>
             `;
@@ -1397,8 +1398,8 @@ const App = (() => {
                 </div></td>
             </tr>
         `).join('') || '<tr><td colspan="6" class="text-center py-8 text-slate-400">No products</td></tr>';
-        tbody.querySelectorAll('.admin-btn-icon.edit').forEach(b => b.addEventListener('click', function () { openProductForm(parseInt(this.dataset.id)); }));
-        tbody.querySelectorAll('.admin-btn-icon.delete').forEach(b => b.addEventListener('click', function () {
+        tbody.querySelectorAll('.admin-btn-icon.edit').forEach(b => b.addEventListener('click', function() { openProductForm(parseInt(this.dataset.id)); }));
+        tbody.querySelectorAll('.admin-btn-icon.delete').forEach(b => b.addEventListener('click', function() {
             const id = parseInt(this.dataset.id);
             if (confirm('Delete this product?')) {
                 PRODUCTS = PRODUCTS.filter(p => p.id !== id);
@@ -1471,7 +1472,7 @@ const App = (() => {
                 </div>
             `).join('');
             box.querySelectorAll('.suggestion-item').forEach(item => {
-                item.addEventListener('click', function () {
+                item.addEventListener('click', function() {
                     const id = parseInt(this.dataset.id);
                     const prod = PRODUCTS.find(p => p.id === id);
                     if (prod) { showCategory(prod.category); setTimeout(() => openProductDetail(id), 200); }
@@ -1498,10 +1499,10 @@ const App = (() => {
             if ($('#flashSeconds')) $('#flashSeconds').textContent = String(Math.floor(d % 60000 / 1000)).padStart(2, '0');
         }, 1000);
 
-        $$('.category-card').forEach(c => c.addEventListener('click', function () { showCategory(this.dataset.category); }));
+        $$('.category-card').forEach(c => c.addEventListener('click', function() { showCategory(this.dataset.category); }));
         $('#backFromCategory')?.addEventListener('click', hideCategoryPage);
 
-        $('#categorySort')?.addEventListener('change', function () {
+        $('#categorySort')?.addEventListener('change', function() {
             currentSort = this.value;
             renderCategoryWithFilters();
         });
@@ -1518,7 +1519,7 @@ const App = (() => {
             renderCategoryWithFilters();
         });
         document.querySelectorAll('.price-chip').forEach(chip => {
-            chip.addEventListener('click', function () {
+            chip.addEventListener('click', function() {
                 const min = parseFloat(this.dataset.min);
                 const max = parseFloat(this.dataset.max);
                 $('#priceMin').value = min;
@@ -1529,14 +1530,14 @@ const App = (() => {
             });
         });
 
-        $('#homeLink')?.addEventListener('click', function () {
+        $('#homeLink')?.addEventListener('click', function() {
             if (!$('#categoryPage').classList.contains('hidden')) hideCategoryPage();
             if (!$('#dashboardWrapper').classList.contains('hidden')) hideDashboard();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        $('#searchInput')?.addEventListener('input', function () { handleSearch(this.value); });
-        $('#searchToggle')?.addEventListener('click', function (e) {
+        $('#searchInput')?.addEventListener('input', function() { handleSearch(this.value); });
+        $('#searchToggle')?.addEventListener('click', function(e) {
             e.stopPropagation();
             const w = $('#searchWrapper'); if (!w) return;
             if (w.classList.contains('hidden')) {
@@ -1559,7 +1560,7 @@ const App = (() => {
         $('#cartOverlay')?.addEventListener('click', () => { $('#cartSidebar').classList.add('translate-x-full'); $('#cartOverlay').classList.add('hidden'); });
         $('#checkoutBtn')?.addEventListener('click', checkout);
 
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             const imageWrap = e.target.closest('.product-image-wrapper');
             if (imageWrap && !e.target.closest('.wishlist-btn')) {
                 const card = imageWrap.closest('.product-card');
@@ -1582,7 +1583,7 @@ const App = (() => {
         });
 
         $('#productDetailClose')?.addEventListener('click', closeProductDetail);
-        $('#productDetailModal')?.addEventListener('click', function (e) { if (e.target === this) closeProductDetail(); });
+        $('#productDetailModal')?.addEventListener('click', function(e) { if (e.target === this) closeProductDetail(); });
         $('#detailQtyDec')?.addEventListener('click', () => {
             if (detailQty > 1) { detailQty--; $('#detailQty').textContent = detailQty; updateDetailTotal(); updateBulkDiscountHint(); }
         });
@@ -1604,20 +1605,20 @@ const App = (() => {
 
         const detailImg = $('#detailImage'); const detailWrap = $('#detailImageWrap');
         if (detailWrap && detailImg) {
-            detailWrap.addEventListener('mousemove', function (e) {
+            detailWrap.addEventListener('mousemove', function(e) {
                 const rect = this.getBoundingClientRect();
                 const x = ((e.clientX - rect.left) / rect.width) * 100;
                 const y = ((e.clientY - rect.top) / rect.height) * 100;
                 detailImg.style.transformOrigin = `${x}% ${y}%`;
                 detailImg.style.transform = 'scale(2)';
             });
-            detailWrap.addEventListener('mouseleave', function () {
+            detailWrap.addEventListener('mouseleave', function() {
                 detailImg.style.transform = 'scale(1)';
                 detailImg.style.transformOrigin = 'center center';
             });
             let touchStartX = 0;
-            detailWrap.addEventListener('touchstart', function (e) { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
-            detailWrap.addEventListener('touchend', function (e) {
+            detailWrap.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+            detailWrap.addEventListener('touchend', function(e) {
                 const p = PRODUCTS.find(x => x.id === detailProductId);
                 if (!p) return;
                 const imgs = (p.images && p.images.length) ? p.images : [p.image];
@@ -1648,7 +1649,7 @@ const App = (() => {
             $('#reviewText').value = '';
             $('#reviewCharCount').textContent = '0';
         });
-        $('#reviewText')?.addEventListener('input', function () { $('#reviewCharCount').textContent = this.value.length; });
+        $('#reviewText')?.addEventListener('input', function() { $('#reviewCharCount').textContent = this.value.length; });
         $('#reviewSubmitBtn')?.addEventListener('click', () => {
             const user = Auth.getCurrentUser(); if (!user) return;
             if (reviewDraftRating < 1) { showToast('Please select a rating', 'warning'); return; }
@@ -1684,7 +1685,7 @@ const App = (() => {
         });
         $('#compareOpen')?.addEventListener('click', () => showToast('Compare coming soon', 'info'));
 
-        $('#themeToggle')?.addEventListener('click', function (e) {
+        $('#themeToggle')?.addEventListener('click', function(e) {
             e.preventDefault(); e.stopPropagation();
             const isDark = document.documentElement.classList.contains('dark');
             if (isDark) { document.documentElement.classList.remove('dark'); theme = 'light'; }
@@ -1705,7 +1706,7 @@ const App = (() => {
         });
         scrollBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        $$('.dash-nav-item[data-page]').forEach(i => i.addEventListener('click', function () {
+        $$('.dash-nav-item[data-page]').forEach(i => i.addEventListener('click', function() {
             $$('.dash-nav-item').forEach(x => x.dataset.active = 'false');
             this.dataset.active = 'true';
             renderDashboardPage(this.dataset.page);
@@ -1716,7 +1717,7 @@ const App = (() => {
             showToast('Signed out successfully', 'info');
         });
 
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             if (e.target.closest('[data-toggle-dash-sidebar]')) {
                 const sidebar = $('#dashboardSidebar'); const overlay = $('#sidebarOverlay');
                 if (sidebar && overlay) {
@@ -1726,20 +1727,20 @@ const App = (() => {
                 }
             }
         });
-        $('#sidebarOverlay')?.addEventListener('click', function () {
+        $('#sidebarOverlay')?.addEventListener('click', function() {
             $('#dashboardSidebar')?.classList.add('-translate-x-full');
             $('#dashboardSidebar')?.classList.remove('translate-x-0');
             this.style.display = 'none';
         });
 
         $('#adminClose')?.addEventListener('click', closeAdmin);
-        $('#adminModal')?.addEventListener('click', function (e) { if (e.target === this) closeAdmin(); });
-        $$('.admin-nav-item[data-panel]').forEach(i => i.addEventListener('click', function () { renderAdminPanel(this.dataset.panel); }));
+        $('#adminModal')?.addEventListener('click', function(e) { if (e.target === this) closeAdmin(); });
+        $$('.admin-nav-item[data-panel]').forEach(i => i.addEventListener('click', function() { renderAdminPanel(this.dataset.panel); }));
         $('#productForm')?.addEventListener('submit', saveProduct);
         $('#productFormCancel')?.addEventListener('click', closeProductForm);
-        $('#productFormModal')?.addEventListener('click', function (e) { if (e.target === this) closeProductForm(); });
+        $('#productFormModal')?.addEventListener('click', function(e) { if (e.target === this) closeProductForm(); });
 
-        $('#hamburgerBtn')?.addEventListener('click', function () {
+        $('#hamburgerBtn')?.addEventListener('click', function() {
             const m = $('#mobileMenu');
             m.classList.toggle('hidden'); m.classList.toggle('flex');
             this.querySelector('i').className = !m.classList.contains('hidden') ? 'fas fa-times' : 'fas fa-bars';
@@ -1790,14 +1791,14 @@ const App = (() => {
             showToast('Signed out successfully', 'info');
         });
 
-        $('#dashboardNav')?.addEventListener('click', function (e) { e.preventDefault(); if (Guards.requireAuth()) showDashboard(); });
-        $('#adminNav')?.addEventListener('click', function (e) { e.preventDefault(); if (Guards.requireRole('admin')) openAdmin(); });
-        $('#mobileDashboardNav')?.addEventListener('click', function (e) { e.preventDefault(); if (Guards.requireAuth()) showDashboard(); $('#mobileMenu').classList.add('hidden'); });
-        $('#mobileAdminNav')?.addEventListener('click', function (e) { e.preventDefault(); if (Guards.requireRole('admin')) openAdmin(); $('#mobileMenu').classList.add('hidden'); });
+        $('#dashboardNav')?.addEventListener('click', function(e) { e.preventDefault(); if (Guards.requireAuth()) showDashboard(); });
+        $('#adminNav')?.addEventListener('click', function(e) { e.preventDefault(); if (Guards.requireRole('admin')) openAdmin(); });
+        $('#mobileDashboardNav')?.addEventListener('click', function(e) { e.preventDefault(); if (Guards.requireAuth()) showDashboard(); $('#mobileMenu').classList.add('hidden'); });
+        $('#mobileAdminNav')?.addEventListener('click', function(e) { e.preventDefault(); if (Guards.requireRole('admin')) openAdmin(); $('#mobileMenu').classList.add('hidden'); });
 
-        $('#newsletterForm')?.addEventListener('submit', function (e) { e.preventDefault(); showToast('Subscribed!', 'success'); this.reset(); });
+        $('#newsletterForm')?.addEventListener('submit', function(e) { e.preventDefault(); showToast('Subscribed!', 'success'); this.reset(); });
 
-        document.addEventListener('keydown', function (e) {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 if (!$('#cartSidebar').classList.contains('translate-x-full')) { $('#cartSidebar').classList.add('translate-x-full'); $('#cartOverlay').classList.add('hidden'); }
                 if (!$('#adminModal').classList.contains('hidden')) closeAdmin();
@@ -1807,7 +1808,7 @@ const App = (() => {
             }
         });
 
-        window.addEventListener('scroll', function () {
+        window.addEventListener('scroll', function() {
             const h = $('#mainHeader');
             if (window.pageYOffset > 20) h?.classList.add('shadow-lg');
             else h?.classList.remove('shadow-lg');
@@ -1963,10 +1964,10 @@ else bootstrap();
     let bc = null;
     if ('BroadcastChannel' in window) bc = new BroadcastChannel(SYNC_CHANNEL);
 
-    window.broadcastSync = function (type) {
+    window.broadcastSync = function(type) {
         const payload = { type, ts: Date.now() };
-        try { bc?.postMessage(payload); } catch (_) { }
-        try { localStorage.setItem('furni_sync_ping', JSON.stringify(payload)); } catch (_) { }
+        try { bc?.postMessage(payload); } catch (_) {}
+        try { localStorage.setItem('furni_sync_ping', JSON.stringify(payload)); } catch (_) {}
     };
 
     function handleSync(type) {
@@ -1977,7 +1978,7 @@ else bootstrap();
                 const t = JSON.parse(localStorage.getItem('furni_theme') || '"light"');
                 if (t === 'dark') document.documentElement.classList.add('dark');
                 else document.documentElement.classList.remove('dark');
-            } catch (_) { }
+            } catch (_) {}
         }
     }
 
@@ -1985,7 +1986,7 @@ else bootstrap();
 
     window.addEventListener('storage', (e) => {
         if (e.key === 'furni_sync_ping' && e.newValue) {
-            try { handleSync(JSON.parse(e.newValue).type); } catch (_) { }
+            try { handleSync(JSON.parse(e.newValue).type); } catch (_) {}
         }
         if (e.key === 'furni_wishlist' || e.key === 'furni_cart') location.reload();
         if (e.key === 'furni_theme') {
@@ -1993,7 +1994,7 @@ else bootstrap();
                 const t = JSON.parse(e.newValue || '"light"');
                 if (t === 'dark') document.documentElement.classList.add('dark');
                 else document.documentElement.classList.remove('dark');
-            } catch (_) { }
+            } catch (_) {}
         }
         if (e.key === 'furni_session' && e.newValue === null) location.reload();
     });
