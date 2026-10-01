@@ -46,21 +46,7 @@ tailwind.config = {
     }
 }
 </script>
-<style>
-.gradient-brand { background: linear-gradient(-45deg, #2b6cb0, #1a365d, #2b6cb0, #7c3aed); background-size: 400% 400%; animation: gradientShift 12s ease infinite; }
-.gradient-hero { background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 50%, #7c3aed 100%); background-size: 200% 200%; animation: gradientShift 8s ease infinite; }
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
-.dark ::-webkit-scrollbar-thumb { background: #4a5568; }
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-.line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
-.snap-gallery { scroll-snap-type: x mandatory; }
-.snap-gallery > * { scroll-snap-align: center; }
-</style>
+
 </head>
 <body class="font-sans bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300">
 <script>(function(){try{const t=JSON.parse(localStorage.getItem('furni_theme')||'"light"');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
