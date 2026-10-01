@@ -1,4 +1,4 @@
-<style>
+
 .gradient-brand { background: linear-gradient(-45deg, #2b6cb0, #1a365d, #2b6cb0, #7c3aed); background-size: 400% 400%; animation: gradientShift 12s ease infinite; }
 .gradient-hero { background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 50%, #7c3aed 100%); background-size: 200% 200%; animation: gradientShift 8s ease infinite; }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -12,4 +12,3 @@
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 .snap-gallery { scroll-snap-type: x mandatory; }
 .snap-gallery > * { scroll-snap-align: center; }
-</style>

@@ -1,4 +1,4 @@
-<script>
+
 /* ========== STORAGE ========== */
 const Storage = (() => {
     const KEYS = {
@@ -1729,4 +1729,3 @@ else bootstrap();
         if (e.key === 'furni_session' && e.newValue === null) location.reload();
     });
 })();
-</script>
