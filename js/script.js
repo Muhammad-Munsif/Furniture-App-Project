@@ -1,4 +1,4 @@
- <script>
+
         /* ============================================================
    FurniCraft — app.js
    All application logic
@@ -2890,4 +2890,4 @@
                 if (e.key === 'furni_session' && e.newValue === null) location.reload();
             });
         })();
-    </script>
+    
